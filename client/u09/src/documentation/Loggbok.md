@@ -10,6 +10,8 @@ Har bestämt mig för att skapa en nerskalad version av Twitter, med namnet Bant
 
 Jag har även skapat en undersökande enkät med hjälp av kunskapen från UX-kursen under första året samt några fler källor. Jag tänkte på vad jag vill få reda på med hänsyn till att jag ska skapa en produkt som liknar en existerande tjänst och frågade därför mycket om användarnas upplevelse av Twitter, X och Threads. Jag följde principen att blanda stängda och öppna frågor, men ställde många öppna frågor för att se om det går att skönja ett mönster i vad användarna uppskattar med de existerande tjänsterna, såväl som vad de inte uppskattar. Även frågor om deras användarvanor av liknande produkter samt deras ålder ställdes, då det är något att ta hänsyn till i designen. Jag valde också bort saker som jag inte finner relevanta för mig just nu, såsom exempelvis kön.
 
+Enligt användbarhetsmålen i Preece, Rogers & Sharp ska en användbar produkt vara bland annat inpräntande (lätt att komma ihåg hur man använder) och intuitiv (lätt att lära). Eftersom jag har en existerande produkt att utgå från, kan jag dra nytta av det redan inlärda användandet hos målgruppen med Twitter, förutsatt att de använder eller har använt det, och även det intuitiva som då följer med tidigare användning av något liknande. Därför tänker jag inte att jag behöver "uppfinna hjulet" igen, utan kan ha Twitter/X och Threads som förlagor designmässigt. Dock behöver jag via min enkät först få svar på om majoriteten har använt Twitter/X och om de tycker att det är intuitivt att använda.
+
 Enkäten har skickats ut i klassen och bland vänner och bekanta, inväntar svar för att gå vidare med prototyper.
 
 **_Källor_**
