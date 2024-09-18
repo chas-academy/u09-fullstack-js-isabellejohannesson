@@ -18,3 +18,7 @@ Enkäten har skickats ut i klassen och bland vänner och bekanta, inväntar svar
 
 - https://camelonta.se/tips-och-trender/sa-goer-du-en-snabb-anvaendbarhetsutvaerdering
 - Preece, J., Rogers, Y., & Sharp, H. (2016). Interaktionsdesign - bortom människa-dator-interaktion. Lund: Studentlitteratur
+
+### 2024-09-18
+
+Jag har nu fått in svar från fem respondenter på min enkät, och väntat in evetuella fler svar, så nu kan jag använda den data jag fått in för att skapa Lo-Fi-prototyper och personas.
