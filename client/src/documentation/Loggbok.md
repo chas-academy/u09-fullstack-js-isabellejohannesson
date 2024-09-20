@@ -27,6 +27,8 @@ Jag har nu fått in svar från fem respondenter på min enkät, och väntat in e
 
 Fräschar upp minnet lite om UX och mobile first, eftersom samtliga respondenter valt att använda mobilen i första hand vid användning av en tjänst som Banterly. Eftersom svaren i min enkät också antydde att om någon av tjänsterna Twitter så som det såg ut innan, X och Threads, så är designen av Threads den som föredras av respondenterna, och jag kommer därför att använda den i första hand som förlaga för designen. Något jag la märke till bland de svar jag fick in var också att Twitter (X) upplevdes som plottrig. Designen i Threads upplever jag däremot som minimalistisk och jag drar slutsatsen att det kan vara dess mer clean design som gör att fler föredrar den. Det blir också något jag kommer att ta med mig i designarbetet.
 
+Arbetar med Lo-Fi-prototyper i Figma.
+
 **_Källor_**
 
 - https://www.uxpin.com/studio/blog/a-hands-on-guide-to-mobile-first-design/
