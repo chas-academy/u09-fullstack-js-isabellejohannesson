@@ -29,6 +29,10 @@ Fräschar upp minnet lite om UX och mobile first, eftersom samtliga respondenter
 
 Arbetar med Lo-Fi-prototyper i Figma.
 
+### 2024-09-24
+
+Skapat persona utifrån min användarenkät och fortsatt med prototyper.
+
 **_Källor_**
 
 - https://www.uxpin.com/studio/blog/a-hands-on-guide-to-mobile-first-design/
