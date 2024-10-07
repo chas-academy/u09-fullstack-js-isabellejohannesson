@@ -1,4 +1,5 @@
 import User from "../models/user.model.js";
+import Notification from "../models/notification.model.js";
 
 export const getUserProfile = async (req, res) => {
     const {userName} = req.params;
@@ -25,27 +26,34 @@ export const followUnfollowUser = async (req, res) => {
             return res.status(400).json({error: "You can not follow yourself"})
         }
 
-        if(!currentUser) {
-            return res.status(404).json({error: "User not found"})
+        if (!currentUser || !userToModify) {
+            return res.status(404).json({ error: "User not found" });
         }
 
-        if(!userToModify) {
-            return res.status(404).json({error: "User not found"})
-        }
+        const isFollowing = currentUser.following.includes(userToModify._id);
 
-        const isFollowing = userToModify.followers.includes(id);
-
-        if(isFollowing) {
-            //Unfollow
-            await User.findByIdAndUpdate(id, {$pull: {followers: req.user._id}});
-            await User.findByIdAndUpdate(req.user._id, {$pull: {following: id}});
-            res.status(200).json({message: "Unfollowed successfully"});
+        if (isFollowing) {
+            // Unfollow
+            currentUser.following.pull(id);
+            userToModify.followers.pull(req.user._id);
+            await Promise.all([currentUser.save(), userToModify.save()]);
+            res.status(200).json({ message: "Unfollowed successfully" });
         } else {
-            // follow the user
-            await User.findByIdAndUpdate(id, {$push : {followers: req.user._id}});
-            await User.findByIdAndUpdate(req.user._id, {$push: {following: id}});
+            // Follow
+            currentUser.following.push(id);
+            userToModify.followers.push(req.user._id);
+            await Promise.all([currentUser.save(), userToModify.save()]);
+
+            const newNotification = new Notification({
+                type: "follow",
+                from: req.user._id,
+                to: userToModify._id,
+            });
+
+            await newNotification.save();
+
+            //TODO: return the id of the user as a response
             res.status(200).json({message: "User followed successfully"});
-            //Send message to user!
         }
     
     } catch (error) {
