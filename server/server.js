@@ -3,6 +3,7 @@ import authRoutes from "./routes/auth.routes.js";
 import dotenv from "dotenv";
 import connectMongoDB from "./db/connectMongoDB.js";
 import cookieParser from "cookie-parser";
+import userRoutes from "./routes/user.routes.js";
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(express.json()); // parse form data from user input
 app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
