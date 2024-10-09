@@ -93,7 +93,7 @@ export const getSuggestedUsers = async (req, res) => {
         
     }
 }
-
+//OM TID: FIXA SÅ DET INTE ÄR ETT TVÅNG ATT ÄNDRA LÖSENORD VARJE GÅNG MAN REDIGERAR PROFILEN!
 export const updateUserProfile = async (req, res) => {
     const {fullName, email, userName, currentPassword, newPassword, bio} = req.body;
     let {profileImg} = req.body;

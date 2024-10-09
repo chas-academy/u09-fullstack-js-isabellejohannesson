@@ -37,6 +37,10 @@ Skapat persona utifrån min användarenkät och fortsatt med prototyper.
 
 Har glömt bort att skriva logg över det jag gör, vilket brukar hända när jag kommit en bit in i projekt och blir för fokuserad på att lösa problem som uppstår. Tiden som gått i projektet hittills har jag lagt på att bygga upp min backend. Har delat upp enligt MVC(R) med controllers, routes och models. Fastnade på bland annat att validera email vid signup, för att jag testade ett exempel på regex som inte fungerade. Märker att det blir allt lättare att felsöka ju mer jag lär mig, för jag kan snabbare räkna ut var felet borde vara och därför vad jag ska söka på för att lösa det! Nu är signup med jsonwebtoken och cookie parser klar och testad med Insomnia, härnäst ska jag skapa funktionalitet för login. Allt kommer in som det ska i datavasen. Jag har inte kommit igång med designen ännu för att jag inte bestämt mig för om jag ska använda Tailwind eller CSS. Jag behöver öva på CSS men det tar också längre tid.
 
+### 2024-10-09
+
+Jag jobbar vidare med backend. Användare ska kunna följa och gilla varandras inlägg och ens följares inlägg ska dyka upp i feeden. Däremot tänker jag begränsa till bara text-inlägg till att börja med, då flera i min UX-undersökning uttryckte att de föredrog det gamla Twitter alternativt andra forum som Reddit. Jag fokuserar nu på att skapa user controllers, och har skapat en branch för det med git, eftersom vi ska följa Git flow. Jag har också skapat en projekttavla på Github i anslutning till mitt repo, samt några övergripande user stories.
+
 **_Källor_**
 
 - https://www.uxpin.com/studio/blog/a-hands-on-guide-to-mobile-first-design/
