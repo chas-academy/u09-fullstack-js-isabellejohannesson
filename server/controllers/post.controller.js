@@ -89,11 +89,59 @@ export const commentPost = async (req, res) => {
         post.comments.push(comment);
         await post.save();
 
+        const notification = new Notification({
+            from: userId,
+            to: post.user,
+            type: "comment"
+        });
+
+        await notification.save();
+
         res.status(200).json(post);
 
     } catch (error) {
         console.log("Error in comment post controller", error.message);
         res.status(500).json({error: "Internal server error"});
+    }
+}
+
+export const deleteComment = async (req, res) => {
+    try {
+    const {postId, commentId} = req.params;
+    const userId = req.user._id;
+
+    const post = await Post.findById(postId);
+    
+    if(!post) {
+        return res.status(404).json({error: "Post not found"});
+    }
+    
+    const comment = post.comments.id(commentId);
+
+    if(!comment) {
+        return res.status(404).json({error: "Comment not found"});
+    }
+
+    if(comment.user.toString() !== userId.toString()) {
+        return res.status(403).json({error: "You are not authorized to delete this comment"});
+    }
+
+    await Post.findByIdAndUpdate(postId, {
+        $pull: { comments: { _id: commentId } }
+    });
+
+    const updatedPost = await Post.findById(postId).populate({
+        path: "comments.user",
+        select: "userName profileImg"
+    });
+
+    await updatedPost.save();
+
+    res.status(200).json({message: "Comment deleted successfully", updatedPost});
+
+    } catch (error) {
+        console.log("Error in deleteComment controller", error.message);
+        res.status(500).json({ error: "Internal server error" });
     }
 }
 
