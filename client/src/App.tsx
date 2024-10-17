@@ -5,7 +5,7 @@ import LoginView from "./views/auth/signup/LoginView";
 import SignUpView from "./views/auth/signup/SignUpView";
 import Navbar from "./components/Navbar";
 import Suggested from "./components/Suggested";
-import Liked from "./components/Liked";
+import LikedPosts from "./components/LikedPosts";
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
         <Route path="/profile" element={<SignUpView />} />
         <Route path="/search" element={<SignUpView />} />
         <Route path="/suggested" element={<Suggested />} />
-        <Route path="/liked" element={<Liked />} />
+        <Route path="/liked" element={<LikedPosts />} />
       </Routes>
       <Suggested />
       <Navbar />
