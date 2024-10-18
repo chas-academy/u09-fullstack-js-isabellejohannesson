@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
-      <div className="font-sans">
+      <div className="flex flex-col min-h-screen font-sans justify-center">
         <App />
       </div>
     </BrowserRouter>

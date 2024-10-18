@@ -22,7 +22,7 @@ const Posts = () => {
           {POSTS.map((post: Post) => (
             <div
               key={post._id}
-              className="post-container bg-white p-a mb-6 rounded-lg shadow-md max-w-xl w-full mx-auto"
+              className="post-container bg-white mb-6 rounded-lg shadow-md max-w-xl w-full mx-auto"
             >
               <div className="avatar mx-4">
                 <div className="w-12 rounded-full">
@@ -42,8 +42,9 @@ const Posts = () => {
                   alt={`${post.user.userName}'s post picture`}
                 />
               </div>
+              <div className="border-b border-secondary w-full my-4"></div>
               <div className="mt-4 mx-4">
-                <h3 className="font-semibold mb-2"></h3>
+                <h3 className="text-sm font-bold mb-2">Comments</h3>
                 {post.comments.map((comment) => (
                   <div key={comment._id} className="flex items-start mb-2">
                     <img
@@ -54,8 +55,10 @@ const Posts = () => {
                       className="w-8 h-8 rounded-full mr-2"
                     />
                     <div>
-                      <h4 className="font-bold">{comment.user.userName}</h4>
-                      <p>{comment.text}</p>
+                      <h4 className="text-xs font-semibold">
+                        {comment.user.userName}
+                      </h4>
+                      <p className="text-xs">{comment.text}</p>
                     </div>
                   </div>
                 ))}

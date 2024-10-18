@@ -7,7 +7,7 @@ import { FaUser } from "react-icons/fa";
 const Navbar = () => {
   return (
     <>
-      <footer className="footer footer-center bg-secondary text-base-content p-6">
+      <footer className="footer footer-center bg-secondary text-base-content p-6 mt-auto">
         <nav className="flex flex-row justify-evenly">
           <Link to={"/"} className="link link:hover">
             <FaHome />
