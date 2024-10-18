@@ -8,7 +8,7 @@ const PostSkeleton = () => {
           <div className="skeleton h-4 w-28 bg-slate-700"></div>
         </div>
       </div>
-      <div className="skeleton h-32 w-full"></div>
+      <div className="skeleton h-40 w-full"></div>
     </div>
   );
 };

@@ -20,8 +20,8 @@ export default {
       {
         customLightTheme: {
           "primary": "#5e17ea" ,
-          "secondary": "#c1ff72",
-          "accent": "#8C52FF" 
+          "secondary": "#EAE4F7",
+          "accent": "#ffe071" 
         }
       }, "dark"],
   },

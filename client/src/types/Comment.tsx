@@ -1,9 +1,9 @@
-import CommentUser from "./CommentUser.tsx";
+import User from "./user.tsx";
 
 interface Comment {
   _id: string;
   text: string;
-  user: CommentUser;
+  user: User;
 }
 
 export default Comment;
