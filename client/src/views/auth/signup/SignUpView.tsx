@@ -25,7 +25,7 @@ const SignUpView = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const isError: boolean = true;
+  const isError: boolean = false;
 
   const passwordsMatch =
     formData.password === formData.repeatPassword &&
