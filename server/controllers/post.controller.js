@@ -26,7 +26,7 @@ export const createPost = async (req, res) => {
         }
 
         if(text.length > 280) {
-            return res.status(400).json({error: "Post can not exceed 280 characters. Make it a thread :)"});
+            return res.status(400).json({error: "Post can not exceed 280 characters"});
         }
 
         const newPost = new Post({

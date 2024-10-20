@@ -6,6 +6,19 @@ import { FaRepeat } from "react-icons/fa6";
 
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+
+type FormData = {
+  userName: string;
+  fullName: string;
+  email: string;
+  password: string;
+};
+
+type ApiError = {
+  message: string;
+};
 
 const SignUpView = () => {
   const [formData, setFormData] = useState({
@@ -16,16 +29,56 @@ const SignUpView = () => {
     repeatPassword: "",
   });
 
+  const { mutate, isError, isPending, error } = useMutation({
+    mutationFn: async (newUser: {
+      userName: string;
+      fullName: string;
+      email: string;
+      password: string;
+    }) => {
+      try {
+        const response = await fetch("/api/auth/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newUser),
+        });
+
+        if (!response.ok) {
+          const errorResponse: ApiError = await response.json();
+          throw new Error(errorResponse.message);
+        }
+        const data: FormData = await response.json();
+        return data;
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          console.error("Error creating account:", error.message);
+          toast.error(error.message);
+        } else {
+          console.error("Unknown error occurred");
+          toast.error("Unknown error occurred");
+        }
+      }
+    },
+    onSuccess: () => {
+      toast.success("Account created successfully. Welcome to Banterly!");
+    },
+  });
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
+
+    if (!passwordsMatch) {
+      toast.error("Passwords do not match");
+      return;
+    }
+    mutate(formData);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-  const isError: boolean = false;
 
   const passwordsMatch =
     formData.password === formData.repeatPassword &&
@@ -103,18 +156,10 @@ const SignUpView = () => {
           )}
           <div className="flex flex-row justify-end">
             <div className="flex flex-col">
-              <button
-                type="submit"
-                className="btn btn-primary"
-                disabled={!passwordsMatch || formData.password.length < 6}
-              >
-                Sign up!
+              <button type="submit" className="btn btn-primary">
+                {isPending ? "Loading..." : "Sign up!"}
               </button>
-              {isError && (
-                <p className="text-red-600 py-4">
-                  Something went wrong, please try again
-                </p>
-              )}
+              {isError && <p className="text-red-600 py-4">{error.message}</p>}
             </div>
           </div>
         </form>
