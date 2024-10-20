@@ -1,4 +1,5 @@
 import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const location = useLocation();
@@ -18,9 +19,15 @@ const Header = () => {
 
   return (
     <>
-      <header className="flex justify-evenly my-6">
-        <img src="../Logo/Banterly_Logo.svg" alt="Logo" />
-        <h1 className="text-md font-bold">{activeView}</h1>
+      <header className="flex justify-between items-center my-6 px-4">
+        <h1 className="text-md font-bold ">{activeView}</h1>
+        <Link to="/">
+          <img
+            src="../Logo/Banterly_Logo.svg"
+            alt="Logo"
+            className="justify-ml-auto"
+          />
+        </Link>
       </header>
     </>
   );

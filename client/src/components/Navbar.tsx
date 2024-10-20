@@ -7,31 +7,29 @@ import { FaUser } from "react-icons/fa";
 const Navbar = () => {
   return (
     <>
-      <footer className="footer footer-center bg-secondary text-base-content p-6 mt-auto">
-        <nav className="flex flex-row justify-evenly">
-          <Link to={"/"} className="link link:hover">
-            <FaHome />
-          </Link>
-          <Link to={"/profile"} className="link link:hover">
-            <FaUser />
-          </Link>
-          <Link to={"/login"} className="link link:hover">
-            <button className="btn btn-primary">Log in</button>
-          </Link>
-          <Link to={"/signup"} className="link link:hover">
-            <button className="btn btn-primary">Sign up</button>
-          </Link>
-          <Link to={"/search"} className="link link:hover">
-            <FaSearch />
-          </Link>
-          <Link to={"/Suggested"} className="link link:hover">
-            Suggested
-          </Link>
-          <Link to={"/Liked"} className="link link:hover">
-            Liked
-          </Link>
-        </nav>
-      </footer>
+      <nav className="bg-secondary text-base-content p-6 fixed bottom-0 w-full flex flex-row justify-evenly lg:flex-col lg:top-0 lg:left-0 lg:bottom-0 lg:w-20 lg:justify-start lg:items-center lg:py-10 lg:space-y-6">
+        <Link to={"/"} className="link link:hover">
+          <FaHome />
+        </Link>
+        <Link to={"/search"} className="link link:hover">
+          <FaSearch />
+        </Link>
+        <Link to={"/profile"} className="link link:hover">
+          <FaUser />
+        </Link>
+        <Link to={"/login"} className="link link:hover">
+          <button className="btn btn-primary">Log in</button>
+        </Link>
+        <Link to={"/signup"} className="link link:hover">
+          <button className="btn btn-primary">Sign up</button>
+        </Link>
+        <Link to={"/Suggested"} className="link link:hover">
+          Suggested
+        </Link>
+        <Link to={"/Liked"} className="link link:hover">
+          Liked
+        </Link>
+      </nav>
     </>
   );
 };
