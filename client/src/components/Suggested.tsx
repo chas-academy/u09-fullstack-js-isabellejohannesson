@@ -1,6 +1,6 @@
 import { POSTS } from "../utils/mockdb/mockPosts.tsx";
 import PostSkeleton from "./skeletons/PostSkeleton.tsx";
-import Post from "../types/post.tsx";
+import Post from "../types/Post.tsx";
 
 const Suggested = () => {
   const isLoading: boolean = false;
