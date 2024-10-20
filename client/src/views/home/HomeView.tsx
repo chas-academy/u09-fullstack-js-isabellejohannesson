@@ -1,8 +1,14 @@
+import Posts from "../../components/Posts";
+import CreatePost from "../CreatePost";
+
 const HomeView = () => {
   return (
-    <div>
-      <img src="../public/Logo/Banterly_Logo.svg" alt="Logo" />
-    </div>
+    <>
+      <div className="flex flex-col items-center">
+        <CreatePost />
+        <Posts />
+      </div>
+    </>
   );
 };
 

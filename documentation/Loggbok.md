@@ -44,3 +44,13 @@ Jag jobbar vidare med backend. Användare ska kunna följa och gilla varandras i
 **_Källor_**
 
 - https://www.uxpin.com/studio/blog/a-hands-on-guide-to-mobile-first-design/
+
+### 2024-10-20
+
+Jag har gjort färdigt backend, och har jobbat med frontend under den gångna veckan. Min obeslutsamet kring val av CSS vs Tailwind gjorde att jag fick väldigt lite tid kvar till frontend och jag önskar nu att jag hade börjat med det tidigare. Det här är ett mönster jag har som jag måste försöka hitta en lösning på. För mig är det svårt att överblicka ett helt projekt och å ena sidan inta rollen som produktägare och å andra sidan vara utvecklare och jobba en "ticket" i taget. Jag svävar lätt iväg och gör något annat än det jag tänkte och jobbar med flera delar samtidigt, vilket gör det svårare att både överblicka helheten samt att veta vad exakt jag gjort i varje commit. Detta behöver jag öva mer på.
+
+Jag lägger också märke till att mitt fokus, som i vanliga fall är oberäkneligt, nu är oerhört svårt att frammana och att jag inte överhuvudtaget kan styra när jag ska koncentrera mig och på vad. Detta har varit ett stort problem för mig i det här projektet hittills, och anledningen till att saker tar så lång tid. Dock har jag också en förmåga att jobba extra intensivt när jag vet att det snart är deadline, så nu hoppas jag att en "extra växel" infinner sig så jag kan bli klar i tid.
+
+Jag har delat upp arbetet i issues på projekttavlan på Github, men insåg att jag hade glömt search. Jag har också glömt att skapa admin, men har kommentarerna å andra sidan där det går att skapa en kommentar på en post, som i sin tur är kopplat till en user, och jag har lagt till delete också. Ska fråga om det är okej på handledning, annars får jag försöka hinna lägga till det. Jag har haft väldigt svårt att omvandla kraven i uppgiftsbeskrivningen för u09 till issues. Mina anteckningar är utspridda på olika ställen.
+
+Härnäst ska jag bygga Search-komponent och göra klart designen. Efter det ska all övrig frontend-funktionalitet på plats.

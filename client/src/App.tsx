@@ -5,21 +5,28 @@ import LoginView from "./views/auth/signup/LoginView";
 import SignUpView from "./views/auth/signup/SignUpView";
 import Navbar from "./components/Navbar";
 import Suggested from "./components/Suggested";
-import Liked from "./components/Liked";
+import LikedPosts from "./components/LikedPosts";
+import Searchbar from "./components/Searchbar";
+import ProfileView from "./views/ProfileView";
+import CreatePost from "./views/CreatePost";
+import Header from "./components/Header";
 
 function App() {
   return (
     <>
-      <Routes>
-        <Route path="/" element={<HomeView />} />
-        <Route path="/login" element={<LoginView />} />
-        <Route path="/signup" element={<SignUpView />} />
-        <Route path="/profile" element={<SignUpView />} />
-        <Route path="/search" element={<SignUpView />} />
-        <Route path="/suggested" element={<Suggested />} />
-        <Route path="/liked" element={<Liked />} />
-      </Routes>
-      <Suggested />
+      <Header />
+      <main className="flex flex-grow justify-center">
+        <Routes>
+          <Route path="/" element={<HomeView />} />
+          <Route path="/login" element={<LoginView />} />
+          <Route path="/signup" element={<SignUpView />} />
+          <Route path="/profile" element={<ProfileView />} />
+          <Route path="/suggested" element={<Suggested />} />
+          <Route path="/liked" element={<LikedPosts />} />
+          <Route path="/search" element={<Searchbar />} />
+          <Route path="/create" element={<CreatePost />} />
+        </Routes>
+      </main>
       <Navbar />
     </>
   );
