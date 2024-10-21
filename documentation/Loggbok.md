@@ -54,3 +54,9 @@ Jag lägger också märke till att mitt fokus, som i vanliga fall är oberäknel
 Jag har delat upp arbetet i issues på projekttavlan på Github, men insåg att jag hade glömt search. Jag har också glömt att skapa admin, men har kommentarerna å andra sidan där det går att skapa en kommentar på en post, som i sin tur är kopplat till en user, och jag har lagt till delete också. Ska fråga om det är okej på handledning, annars får jag försöka hinna lägga till det. Jag har haft väldigt svårt att omvandla kraven i uppgiftsbeskrivningen för u09 till issues. Mina anteckningar är utspridda på olika ställen.
 
 Härnäst ska jag bygga Search-komponent och göra klart designen. Efter det ska all övrig frontend-funktionalitet på plats.
+
+### 2024-10-21
+
+Jag inser att jag inte har en extra admin-CRUD i min applikation, vilket var ett av kraven. Däremot har jag skapat extra CRUD för kommentarer istället, och jag frågade på handledningen om det var okej. Olli-Heikki trodde att det skulle gå bra, förutsatt att jag också lägger till redigering för kommentarerna. Just nu har jag create och delete, så jag kommer att utöka min kommentars-CRUD. Eftersom det är en CRUD i en CRUD, borde det visa på samma färdigheter som en admin-roll som kan skapa, redigera och uppdatera användare.
+
+Jag har beslutat mig för att testa React Query/Tan-stack för att hantera mina API-requests, eftersom det verkar passa för PWA, då det har bra stöd för cacheing. Har installerat det och fått hela sign up-formuläret klart från frontend till databas, så nu ska jag skapa funktionaliteten för login och sedan resten. Jag borde ha börjat med det först, eftersom jag har en authCheck som behöver finnas med för det andra innehållet som är för inloggade användare, så det är något att komma ihåg till nästa gång.
