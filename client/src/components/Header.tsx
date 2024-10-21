@@ -5,7 +5,8 @@ const Header = () => {
   const location = useLocation();
 
   const routeNames: { [key: string]: string } = {
-    "/": "Home",
+    "/": "/welcome",
+    "/home": "Home",
     "/login": "Log in",
     "/signup": "Sign up",
     "/profile": "Profile",
@@ -23,7 +24,7 @@ const Header = () => {
         <h1 className="text-md font-bold ">{activeView}</h1>
         <Link to="/">
           <img
-            src="../Logo/Banterly_Logo.svg"
+            src="../Logo/Banterly_Logo_3.svg"
             alt="Logo"
             className="justify-ml-auto"
           />

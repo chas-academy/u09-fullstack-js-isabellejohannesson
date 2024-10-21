@@ -87,8 +87,8 @@ const SignUpView = () => {
   return (
     <>
       <div className="flex flex-col justify-center items-center w-full h-screen lg:w-9/12 mx-auto">
-        <h2 className="text-center p-4 my-6 mx-auto font-bold text-lg">
-          Sign up
+        <h2 className="text-center p-4 my-6 mx-auto font-heading font-bold text-primary text-3xl">
+          Sign up today
         </h2>
         <form onSubmit={handleSubmit}>
           <label className="input input-bordered flex items-center gap-2 max-w-sm w-full my-2">
@@ -164,7 +164,9 @@ const SignUpView = () => {
           </div>
         </form>
         <div className="flex flex-col py-6">
-          <p className="text-sm">Already have an account?</p>
+          <p className="text-sm font-sans font-semibold">
+            Already have an account?
+          </p>
           <Link to="/login" className="flex flex-col">
             <button className="btn btn-primary">Log in</button>
           </Link>

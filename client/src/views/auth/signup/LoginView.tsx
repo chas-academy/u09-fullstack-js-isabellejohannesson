@@ -63,7 +63,7 @@ const LoginView = () => {
   return (
     <>
       <div className="flex flex-col justify-center items-center w-full h-screen lg:w-9/12 mx-auto">
-        <h2 className="text-center p-4 my-6 mx-auto font-bold text-lg">
+        <h2 className="text-center p-4 my-6 mx-auto font-heading font-bold text-primary text-3xl">
           Log in
         </h2>
         <form onSubmit={handleSubmit}>
@@ -99,7 +99,9 @@ const LoginView = () => {
           </div>
         </form>
         <div className="flex flex-col py-6">
-          <p className="text-sm">Haven't signed up yet? Do it now!</p>
+          <p className="text-sm font-sans font-semibold">
+            Haven't signed up yet? Do it now!
+          </p>
           <Link to="/signup" className="flex flex-col">
             <button className="btn btn-primary">Sign up</button>
           </Link>

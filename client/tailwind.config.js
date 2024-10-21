@@ -10,6 +10,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Roboto', 'sans-serif'], 
+        heading: ['Pattaya', 'sans-serif']
       },
     },
   },

@@ -1,10 +1,40 @@
-import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
+import { MdOutlineLogin } from "react-icons/md";
 
-// Fixa conditionals på den här: oinloggat = signup, login och search, inloggat = profile, search, home, liked posts, suggested.
+import { Link } from "react-router-dom";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import User from "../types/user";
+
 const Navbar = () => {
+  const { mutate: logout } = useMutation({
+    mutationFn: async () => {
+      try {
+        const response = await fetch("/api/auth/logout", {
+          method: "POST",
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.error || "Something went wrong");
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error("Error creating account:", error.message);
+          toast.error(error.message);
+        } else {
+          console.error("Unknown error occurred");
+          toast.error("Unknown error occurred");
+        }
+      }
+    },
+    onSuccess: () => {
+      toast.success("You are logged out");
+    },
+  });
+  const { data: authCheck } = useQuery<User>({ queryKey: ["authCheck"] });
+
   return (
     <>
       <nav className="bg-secondary text-base-content p-6 fixed bottom-0 w-full flex flex-row justify-evenly lg:flex-col lg:top-0 lg:left-0 lg:bottom-0 lg:w-20 lg:justify-start lg:items-center lg:py-10 lg:space-y-6">
@@ -14,14 +44,11 @@ const Navbar = () => {
         <Link to={"/search"} className="link link:hover">
           <FaSearch />
         </Link>
-        <Link to={"/profile"} className="link link:hover">
+        <Link
+          to={`/profile/${authCheck?.userName}`}
+          className="link link:hover"
+        >
           <FaUser />
-        </Link>
-        <Link to={"/login"} className="link link:hover">
-          <button className="btn btn-primary">Log in</button>
-        </Link>
-        <Link to={"/signup"} className="link link:hover">
-          <button className="btn btn-primary">Sign up</button>
         </Link>
         <Link to={"/Suggested"} className="link link:hover">
           Suggested
@@ -29,6 +56,13 @@ const Navbar = () => {
         <Link to={"/Liked"} className="link link:hover">
           Liked
         </Link>
+        <MdOutlineLogin
+          className="w-5 h-5 cursor-pointer"
+          onClick={(e) => {
+            e.preventDefault();
+            logout();
+          }}
+        />
       </nav>
     </>
   );
