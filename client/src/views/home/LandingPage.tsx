@@ -6,7 +6,7 @@ const LandingPage = () => {
       <h1 className="font-heading text-4xl font-bold text-primary">
         Welcome to Banterly
       </h1>
-      <p className="mt-4 text-lg">
+      <p className="mt-4 text-lg text-center font-sans">
         Please log in or sign up to enjoy some friendly banter:
       </p>
       <div className="mt-8 flex space-x-4">

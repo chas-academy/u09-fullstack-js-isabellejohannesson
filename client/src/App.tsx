@@ -25,7 +25,7 @@ function App() {
       try {
         const res = await fetch("/api/auth/authCheck");
         const data = await res.json();
-        if (data.error) return null;
+        if (data.error) return null; //reset authCheck-objektet, som annars bara blir tomt
         if (!res.ok) {
           throw new Error(data.error || "Something went wrong");
         }
@@ -75,7 +75,7 @@ function App() {
             element={authCheck ? <HomeView /> : <Navigate to="/" />}
           />
           <Route
-            path="/profile:userName"
+            path="/profile/:userName"
             element={authCheck ? <ProfileView /> : <Navigate to="/" />}
           />
           <Route

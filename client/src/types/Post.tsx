@@ -1,4 +1,4 @@
-import User from "./user.tsx";
+import User from "./User.tsx";
 import Comment from "./Comment.tsx";
 
 interface Post {

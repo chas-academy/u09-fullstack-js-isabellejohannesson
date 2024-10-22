@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { FaLock, FaUser } from "react-icons/fa";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 type FormData = {
   userName: string;
@@ -14,6 +14,8 @@ const LoginView = () => {
     userName: "",
     password: "",
   });
+
+  const queryClient = useQueryClient();
 
   const {
     mutate: loginMutation,
@@ -43,7 +45,7 @@ const LoginView = () => {
       return data;
     },
     onSuccess: () => {
-      toast.success("Login successful");
+      queryClient.invalidateQueries({ queryKey: ["authCheck"] });
     },
     onError: (error: Error) => {
       toast.error(error.message);

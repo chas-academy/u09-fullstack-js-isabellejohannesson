@@ -1,8 +1,10 @@
 import { useState, useRef } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { FaCamera, FaImages } from "react-icons/fa";
+import { RxCross1 } from "react-icons/rx";
 import toast from "react-hot-toast";
 import Post from "../types/Post";
+import User from "../types/user";
 
 const CreatePost = () => {
   const [formData, setFormData] = useState({
@@ -13,12 +15,12 @@ const CreatePost = () => {
   const [img, setImg] = useState<string | null>(null);
   const imgRef = useRef<HTMLInputElement>(null);
 
-  const { data: authCheck } = useQuery({ queryKey: ["authCheck"] });
+  const { data: authCheck } = useQuery<User>({ queryKey: ["authCheck"] });
   const queryClient = useQueryClient();
 
   const {
     mutate: createPost,
-    isLoading,
+    isPending,
     isError,
     error,
   } = useMutation({
@@ -40,7 +42,7 @@ const CreatePost = () => {
       setFormData({ ...formData, text: "" });
       setImg(null);
       toast.success("Post created successfully");
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      queryClient.invalidateQueries({ queryKey: ["posts"] }); //Har inte den här??
     },
     onError: (error) => {
       console.error("Error creating post:", error.message);
@@ -83,20 +85,14 @@ const CreatePost = () => {
       <div className="flex flex-row">
         <div className="flex flex-col justify-center align-middle">
           <img
-            src={authCheck?.profileImg || "../default-avatar.png"}
+            src={authCheck?.profileImg || "../Placeholder_avatar.png"}
             alt="User's profile"
             className="w-10 h-10 rounded-full mr-2 mb-2"
-            onClick={() => {
-              setImg(null);
-              if (imgRef.current) {
-                imgRef.current.value = "";
-              }
-            }}
           />
           <div className="border-l border-secondary h-full mx-6 py-4 ml-4"></div>
         </div>
         <div className="flex flex-col">
-          <h2 className="text-sm">{authCheck?.name || "User Name"}</h2>
+          <h2 className="text-sm">{authCheck?.userName || "User"}</h2>
           <form onSubmit={handleSubmit}>
             <textarea
               className="textarea-ghost"
@@ -120,6 +116,15 @@ const CreatePost = () => {
                 placeholder="Paste image URL here"
               />
             </label>
+            <RxCross1
+              onClick={() => {
+                setImg(null);
+                if (imgRef.current) {
+                  imgRef.current.value = "";
+                }
+              }}
+              className="cursor-pointer"
+            />
 
             <label>
               Upload or Take a Photo:
@@ -142,7 +147,7 @@ const CreatePost = () => {
                 type="submit"
                 className="btn btn-primary rounded-full btn-sm text-white px-4"
               >
-                {isLoading ? "Posting..." : "Post"}
+                {isPending ? "Loading..." : "Post"}
               </button>
             </div>
             {isError && (

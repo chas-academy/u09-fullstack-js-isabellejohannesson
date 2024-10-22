@@ -1,69 +1,89 @@
-import { POSTS } from "../utils/mockdb/mockPosts.tsx";
 import PostSkeleton from "./skeletons/PostSkeleton.tsx";
-import Post from "../types/Post.tsx";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 
-const Posts = () => {
-  const isLoading: boolean = false;
+import type Post from "../types/Post.tsx";
+import type User from "../types/User.tsx";
+
+import OnePost from "./OnePost.tsx";
+
+/* type FeedType = "forYou" | "following" | "posts" | "likes"; */
+type FeedType = string;
+
+interface PostProps {
+  feedType: FeedType;
+  userName?: User;
+  _id?: Post;
+}
+
+const Posts = ({ feedType, userName, _id }: PostProps) => {
+  const getPostEndpoint = () => {
+    switch (feedType) {
+      case "forYou":
+        return "/api/posts/all";
+      case "following":
+        return "/api/posts/following";
+      case "posts":
+        return `/api/posts/user/${userName}`;
+      case "likes":
+        return `/api/posts/likes/${_id}`;
+      default:
+        return "/api/posts/all";
+    }
+  };
+
+  const POST_ENDPOINT = getPostEndpoint();
+
+  const {
+    data: posts,
+    isLoading,
+    refetch,
+    isRefetching,
+  } = useQuery({
+    queryKey: ["posts"],
+    queryFn: async () => {
+      try {
+        const res = await fetch(POST_ENDPOINT);
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || "Something went wrong");
+        }
+
+        return data;
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          console.error("Error creating account:", error.message);
+          toast.error(error.message);
+        } else {
+          console.error("Unknown error occurred");
+          toast.error("Unknown error occurred");
+        }
+      }
+    },
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [feedType, refetch, userName]);
 
   return (
     <>
-      {isLoading && (
+      {(isLoading || isRefetching) && (
         <div className="flex flex-col justify-center">
           <PostSkeleton />
           <PostSkeleton />
           <PostSkeleton />
         </div>
       )}
-      {!isLoading && POSTS?.length === 0 && (
-        <p className="text-center my-4">No posts here yet!</p>
+      {!isLoading && !isRefetching && posts?.length === 0 && (
+        <p className="text-center my-4">No banter here yet</p>
       )}
-      {!isLoading && POSTS && (
-        <div className="flex flex-col justify-center overflow-y-auto px-4 my-4">
-          {POSTS.map((post: Post) => (
-            <div
-              key={post._id}
-              className="post-container bg-white mb-6 rounded-lg shadow-md max-w-xl w-full mx-auto"
-            >
-              <div className="avatar mx-4">
-                <div className="w-12 rounded-full">
-                  <img
-                    src={post.user.profileImg || "../Placeholder_avatar.png"}
-                    alt={`${post.user.userName}'s profile`}
-                  />
-                </div>
-                <h2 className="font-bold text-sm px-2 text-center">
-                  {post.user.userName}
-                </h2>
-              </div>
-              <p className="p-4">{post.text}</p>
-              <div className="max-w-fit p-4 rounded-lg">
-                <img
-                  src={post.img}
-                  alt={`${post.user.userName}'s post picture`}
-                />
-              </div>
-              <div className="border-b border-secondary w-full my-4"></div>
-              <div className="mt-4 mx-4">
-                <h3 className="text-sm font-bold mb-2">Comments</h3>
-                {post.comments.map((comment) => (
-                  <div key={comment._id} className="flex items-start mb-2">
-                    <img
-                      src={
-                        comment.user.profileImg || "../Placeholder_avatar.png"
-                      }
-                      alt={`${comment.user.userName}'s profile`}
-                      className="w-8 h-8 rounded-full mr-2"
-                    />
-                    <div>
-                      <h4 className="text-xs font-semibold">
-                        {comment.user.userName}
-                      </h4>
-                      <p className="text-xs">{comment.text}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+      {!isLoading && !isRefetching && posts && (
+        <div>
+          {posts.map((post: Post) => (
+            <OnePost key={post._id} post={post} />
           ))}
         </div>
       )}
