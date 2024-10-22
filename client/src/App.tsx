@@ -56,7 +56,7 @@ function App() {
     <>
       {authCheck && <Header />}
       <Toaster />
-      <main className="flex flex-grow justify-center">
+      <main className="flex flex-col justify-center max-w-screen-lg mx-auto">
         <Routes>
           <Route
             path="/"

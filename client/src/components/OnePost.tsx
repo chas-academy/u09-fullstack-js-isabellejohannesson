@@ -6,9 +6,7 @@ import { Link } from "react-router-dom";
 import LoadingSpinner from "./loadingSpinner";
 
 import { FaRegComment } from "react-icons/fa";
-import { BiRepost } from "react-icons/bi";
 import { FaRegHeart } from "react-icons/fa";
-import { FaRegBookmark } from "react-icons/fa6";
 import { FaTrash } from "react-icons/fa";
 import { formatPostDate } from "../utils/formatPostDate";
 
@@ -29,6 +27,17 @@ const OnePost = ({ post }: PostProp) => {
   const isMyPost = authCheck?._id === post.user._id;
 
   const formattedDate = formatPostDate(post.createdAt ?? "Unknown");
+
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+
+  const handleDeleteConfirmation = () => {
+    setShowConfirmModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    setShowConfirmModal(false);
+    handleDeletePost();
+  };
 
   const { mutate: deletePost, isPending: isDeleting } = useMutation({
     mutationFn: async () => {
@@ -147,18 +156,19 @@ const OnePost = ({ post }: PostProp) => {
 
   return (
     <>
-      <div className="flex gap-2 items-start p-4 border-b border-gray-700">
-        <div className="avatar">
+      <div className="wrapper flex flex-col justify-center overflow-y-auto max-w-2xl p-4">
+        <div className="avatar pt-2">
           <Link
             to={`/profile/${postOwner.userName}`}
-            className="w-8 rounded-full overflow-hidden"
+            className="w-8 h-8 rounded-full overflow-hidden"
           >
             <img src={postOwner.profileImg || "/Placeholder_avatar.png"} />
           </Link>
-        </div>
-        <div className="flex flex-col flex-1">
-          <div className="flex gap-2 items-center">
-            <Link to={`/profile/${postOwner.userName}`} className="font-bold">
+          <div className="user-info flex flex-col pl-2">
+            <Link
+              to={`/profile/${postOwner.userName}`}
+              className="font-bold px-1 text-primary text-sm"
+            >
               {postOwner.fullName}
             </Link>
             <span className="text-gray-700 flex gap-1 text-sm">
@@ -168,31 +178,66 @@ const OnePost = ({ post }: PostProp) => {
               <span>·</span>
               <span>{formattedDate}</span>
             </span>
+          </div>
+        </div>
+        <div className="flex flex-col justify-center px-4">
+          <div className="flex gap-2 items-center px-2">
             {isMyPost && (
-              <span className="flex justify-end flex-1">
+              <span className="flex justify-end ml-auto">
                 {!isDeleting && (
-                  <FaTrash
-                    className="cursor-pointer hover:text-red-500"
-                    onClick={handleDeletePost}
-                  />
+                  <>
+                    <FaTrash
+                      className="cursor-pointer hover:text-red-500 focus:text-red"
+                      onClick={handleDeleteConfirmation}
+                    />
+
+                    {showConfirmModal && (
+                      <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                        <div className="bg-white p-6 rounded shadow-lg">
+                          <h3 className="text-lg font-bold">
+                            Bekräfta borttagning
+                          </h3>
+                          <p>Är du säker på att du vill ta bort inlägget?</p>
+                          <div className="flex justify-end mt-4 space-x-2">
+                            <button
+                              className="btn btn-secondary"
+                              onClick={() => setShowConfirmModal(false)}
+                            >
+                              Avbryt
+                            </button>
+                            <button
+                              className="btn btn-error"
+                              onClick={handleConfirmDelete}
+                            >
+                              Ta bort
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </>
                 )}
 
                 {isDeleting && <LoadingSpinner size="sm" />}
               </span>
             )}
           </div>
-          <div className="flex flex-col gap-3 overflow-hidden">
-            <span>{post.text}</span>
+          <div className="post-container flex flex-col">
+            <span className="px-2 text-sm">{post.text}</span>
             {post.img && (
-              <img
-                src={post.img}
-                className="h-80 object-contain rounded-lg border border-gray-700"
-                alt=""
-              />
+              <div className="flex img-container max-w-fit p-4 rounded-lg justify-center">
+                <img
+                  src={post.img}
+                  alt={`${post.user.userName}'s post picture`}
+                  className="max-w-full md:max-w-lg max-h-96 object-contain rounded-lg border border-gray-700"
+                />
+              </div>
             )}
           </div>
+          {/* Likes and comments divider */}
+          <div className="likes-comments-wrapper border-b-2 border-secondary h-full mx-4 py-2"></div>
           <div className="flex justify-between mt-3">
-            <div className="flex gap-4 items-center w-2/3 justify-between">
+            <div className="flex gap-2 items-center justify-between">
               <div
                 className="flex gap-1 items-center cursor-pointer group"
                 onClick={() => {
@@ -215,7 +260,9 @@ const OnePost = ({ post }: PostProp) => {
                 className="modal border-none outline-none"
               >
                 <div className="modal-box rounded border border-accent">
-                  <h3 className="font-bold text-lg mb-4">COMMENTS</h3>
+                  <h3 className="font-heading font-primary text-lg mb-4">
+                    Comments
+                  </h3>
                   <div className="flex flex-col gap-3 max-h-60 overflow-auto">
                     {post.comments.length === 0 && (
                       <p className="text-sm text-primary">
@@ -254,7 +301,7 @@ const OnePost = ({ post }: PostProp) => {
                   >
                     <textarea
                       className="textarea w-full p-1 rounded text-md resize-none border focus:outline-none  border-gray-800"
-                      placeholder="Add a comment..."
+                      placeholder="Add your comment..."
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}
                     />
@@ -267,12 +314,7 @@ const OnePost = ({ post }: PostProp) => {
                   <button className="outline-none">close</button>
                 </form>
               </dialog>
-              <div className="flex gap-1 items-center group cursor-pointer">
-                <BiRepost className="w-6 h-6  text-slate-500 group-hover:text-green-500" />
-                <span className="text-sm text-slate-500 group-hover:text-green-500">
-                  0
-                </span>
-              </div>
+
               <div
                 className="flex gap-1 items-center group cursor-pointer"
                 onClick={handleLikePost}
@@ -294,11 +336,9 @@ const OnePost = ({ post }: PostProp) => {
                 </span>
               </div>
             </div>
-            <div className="flex w-1/3 justify-end gap-2 items-center">
-              <FaRegBookmark className="w-4 h-4 text-slate-500 cursor-pointer" />
-            </div>
           </div>
         </div>
+        <div className="border-b-2 border-secondary h-full mx-4 py-2"></div>
       </div>
     </>
   );

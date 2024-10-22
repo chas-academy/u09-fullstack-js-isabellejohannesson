@@ -81,7 +81,7 @@ const Posts = ({ feedType, userName, _id }: PostProps) => {
         <p className="text-center my-4">No banter here yet</p>
       )}
       {!isLoading && !isRefetching && posts && (
-        <div>
+        <div className="flex flex-col justify-center">
           {posts.map((post: Post) => (
             <OnePost key={post._id} post={post} />
           ))}

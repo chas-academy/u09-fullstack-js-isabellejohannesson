@@ -17,7 +17,7 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <div className="flex flex-col min-h-screen font-sans justify-center">
+        <div className="flex flex-col font-sans">
           <App />
         </div>
       </QueryClientProvider>

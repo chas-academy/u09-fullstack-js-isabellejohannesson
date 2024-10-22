@@ -20,7 +20,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="flex justify-between items-center my-6 px-4">
+      <header className="flex justify-between items-center my-6 px-4 top-0">
         <h1 className="text-md font-bold ">{activeView}</h1>
         <Link to="/">
           <img
