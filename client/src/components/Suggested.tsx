@@ -19,12 +19,15 @@ const Suggested = () => {
       )}
       {!isLoading && POSTS && (
         <div className="flex flex-col justify-center overflow-y-auto px-4 my-4">
+          <h2 className="font-heading text-2xl text-primary justify-center text-center py-4">
+            Discover more banter
+          </h2>
           {POSTS.map((post: Post) => (
             <div
               key={post._id}
               className="post-container bg-white p-a mb-6 rounded-lg shadow-md max-w-xl w-full mx-auto"
             >
-              <div className="avatar mx-4">
+              <div className="avatar mx-4 py-4">
                 <div className="w-12 rounded-full">
                   <img
                     src={post.user.profileImg || "../Placeholder_avatar.png"}

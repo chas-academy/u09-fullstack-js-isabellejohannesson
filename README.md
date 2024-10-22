@@ -1,6 +1,6 @@
 # u09-fullstack-js-isabellejohannesson
 
-## Twitter clone
+## Banterly - enjoy friendly banter
 
 ### What it is
 
@@ -13,4 +13,6 @@ Npm run dev
 
 Connection MongoDB -> string in Compass for DB access.
 
-Continue here.
+### Contents of application
+
+In this application users can create an account where they can create posts with text and have the option to add an image if they want to. Users can also comment on other posts, follow/unfollow other users and see the posts they have liked on their profile page. Instead of an admin-feature I have added a comments-CRUD feature to my application, where the users can create, edit and delete comments they have made, and of course also read comments. You can read more about my process in the _documentation_ -> _Loggbok_.

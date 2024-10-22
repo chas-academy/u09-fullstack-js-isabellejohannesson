@@ -4,17 +4,19 @@ import Suggested from "./Suggested";
 const Searchbar = () => {
   return (
     <>
-      <div className="flex justify-center items-center mx-auto max-w-xl w-full my-4">
-        <div className="w-full p-4">
-          <label className="input input-ghost bg-secondary rounded-2xl flex gap-2 w-full">
-            <input type="text" className="grow" placeholder="Search" />
-            <button className="btn btn-ghost" type="submit">
-              <FaSearch />
-            </button>
-          </label>
+      <div className="flex flex-col justify-center overflow-y-auto px-4 my-4">
+        <div className="flex justify-center items-center mx-auto max-w-xl w-full my-4">
+          <div className="w-full p-4">
+            <label className="input input-ghost bg-secondary rounded-2xl flex gap-2 w-full">
+              <input type="text" className="grow" placeholder="Search" />
+              <button className="btn btn-ghost" type="submit">
+                <FaSearch />
+              </button>
+            </label>
+          </div>
         </div>
+        <Suggested />
       </div>
-      <Suggested />
     </>
   );
 };
