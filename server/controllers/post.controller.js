@@ -290,3 +290,16 @@ export const getUserPosts = async (req, res) => {
         res.status(500).json({error: "Internal server error"});
     }
 }
+
+export const searchPosts = async (req, res) => {
+    const { q } = req.query;
+
+    try {
+        const posts = await Post.find({
+            text: {$regex: q, $options: 'i'}
+        });
+        res.status(200).json(posts);
+    } catch (error) {
+       res.status(500).json({message: error.message})
+    } 
+}

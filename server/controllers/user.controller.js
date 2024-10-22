@@ -148,3 +148,20 @@ export const updateUserProfile = async (req, res) => {
         
     }
 }
+
+export const searchUser = async (req, res) => {
+    const {q} = req.query;
+
+    try {
+        const users = await User.find({
+            $or: [
+                { username: { $regex: String(q), $options: 'i' } }, 
+                { fullName: { $regex: String(q), $options: 'i' } } 
+            ]
+        });
+        res.status(200).json(users);
+        
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
+}
