@@ -1,6 +1,6 @@
 import express, { urlencoded } from "express";
 import dotenv from "dotenv";
-import cors from 'cors';
+import cors from "cors";
 import cookieParser from "cookie-parser";
 import {v2 as cloudinary} from 'cloudinary';
 
