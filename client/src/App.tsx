@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import HomeView from "./views/home/HomeView";
 import LoginView from "./views/auth/signup/LoginView";
 import SignUpView from "./views/auth/signup/SignUpView";
-import ProfileView from "./views/ProfileView";
+import ProfileView from "./views/Profile/ProfileView";
 import CreatePost from "./views/CreatePost";
 import NotificationsView from "./views/NotificationsView";
 import LandingPage from "./views/home/LandingPage";

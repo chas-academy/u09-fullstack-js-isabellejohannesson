@@ -1,4 +1,4 @@
-import Suggested from "../components/Suggested";
+import Suggested from "../../components/Suggested";
 
 const Profile = () => {
   return (

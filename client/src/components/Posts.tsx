@@ -8,7 +8,6 @@ import type User from "../types/User.tsx";
 
 import OnePost from "./OnePost.tsx";
 
-/* type FeedType = "forYou" | "following" | "posts" | "likes"; */
 type FeedType = string;
 
 interface PostProps {

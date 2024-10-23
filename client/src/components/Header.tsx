@@ -1,10 +1,10 @@
-import { useLocation } from "react-router-dom";
+/* import { useLocation } from "react-router-dom"; */
 import { Link } from "react-router-dom";
 
 const Header = () => {
-  const location = useLocation();
+  /*   const location = useLocation(); */
 
-  const routeNames: { [key: string]: string } = {
+  /*   const routeNames: { [key: string]: string } = {
     "/": "/welcome",
     "/home": "Home",
     "/login": "Log in",
@@ -15,13 +15,13 @@ const Header = () => {
     "/search": "Search",
     "/create": "Create a post",
   };
-
-  const activeView = routeNames[location.pathname] || "Unknown page";
+ */
+  /*  const activeView = routeNames[location.pathname] || "Unknown page"; */
 
   return (
     <>
       <header className="flex justify-between items-center my-6 px-4 top-0">
-        <h1 className="text-md font-bold ">{activeView}</h1>
+        {/*  <h1 className="text-md font-bold ">{activeView}</h1> */}
         <Link to="/">
           <img
             src="../Logo/Banterly_Logo_3.svg"

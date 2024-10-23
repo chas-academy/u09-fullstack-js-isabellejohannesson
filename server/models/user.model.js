@@ -23,14 +23,14 @@ const userSchema = new mongoose.Schema({
     },
     followers: [
         {
-            type: mongoose.Schema.Types.ObjectId, // will base followers on unique id given by MongoDB
+            type: mongoose.Schema.Types.ObjectId, 
             ref:"User",
             default: [] //User has 0 followers on signup
         }
     ],
     following: [
         {
-            type: mongoose.Schema.Types.ObjectId, // will base followers on unique id given by MongoDB
+            type: mongoose.Schema.Types.ObjectId, 
             ref:"User",
             default: [] //User follows 0 people on signup
         }
