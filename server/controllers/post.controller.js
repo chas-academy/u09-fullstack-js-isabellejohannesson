@@ -105,6 +105,48 @@ export const commentPost = async (req, res) => {
     }
 }
 
+export const updateComment = async (req, res) => {
+    try {
+    const {postId, commentId} = req.params;
+    const userId = req.user._id;
+    const {text} = req.body;
+
+    if(!text) {
+        return res.status(400).json({error: "Text field is required"});
+    }
+
+    const post = await Post.findById(postId)
+
+    if(!post) {
+        return res.status(404).json({error: "Post not found"});
+    }
+
+    const comment = post.comments.id(commentId);
+        if (!comment) {
+            return res.status(404).json({ error: "Comment not found" });
+        }
+    
+        if (comment.user.toString() !== userId.toString()) {
+            return res.status(403).json({ error: "You are not authorized to update this comment" });
+        }
+
+        comment.text = text;
+
+        await post.save();
+
+        const updatedPost = await Post.findById(postId).populate({
+            path: "comments.user",
+            select: "userName profileImg"
+        });
+
+        res.status(200).json({ message: "Comment updated successfully", updatedPost });
+    } catch (error) {
+        console.log("Error in updateComment controller", error.message);
+        res.status(500).json({ error: "Internal server error" });
+    }
+
+}
+
 export const deleteComment = async (req, res) => {
     try {
     const {postId, commentId} = req.params;
