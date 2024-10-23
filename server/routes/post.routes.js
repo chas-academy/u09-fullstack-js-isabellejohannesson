@@ -14,7 +14,7 @@ router.get("/search", protectedRoute, searchPosts)
 router.post("/create", protectedRoute, createPost)
 router.post("/like/:id", protectedRoute, likeUnlikePost)
 router.post("/comment/:id", protectedRoute, commentPost)
-router.post("/:postId/comments/:commentId", protectedRoute, updateComment)
+router.put("/:postId/comments/:commentId", protectedRoute, updateComment)
 router.delete("/:id", protectedRoute, deletePost)
 router.delete("/:postId/comments/:commentId", protectedRoute, deleteComment)
 

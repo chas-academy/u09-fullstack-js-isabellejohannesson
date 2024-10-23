@@ -5,9 +5,8 @@ import { Link } from "react-router-dom";
 
 import LoadingSpinner from "./loadingSpinner";
 
-import { FaRegComment } from "react-icons/fa";
-import { FaRegHeart } from "react-icons/fa";
-import { FaTrash } from "react-icons/fa";
+import { FaRegComment, FaRegHeart, FaTrash, FaPen } from "react-icons/fa";
+
 import { formatPostDate } from "../utils/formatPostDate";
 
 import type Post from "../types/Post";
@@ -19,8 +18,13 @@ interface PostProp {
 
 const OnePost = ({ post }: PostProp) => {
   const [comment, setComment] = useState("");
+  const [editCommentId, setEditCommentId] = useState<string | null>(null);
+  const [editCommentText, setEditCommentText] = useState("");
+
   const { data: authCheck } = useQuery<User>({ queryKey: ["authCheck"] });
+
   const queryClient = useQueryClient();
+
   const postOwner = post.user;
   const isLiked = post.likes.includes(authCheck?._id ?? "Unknown");
 
@@ -139,6 +143,38 @@ const OnePost = ({ post }: PostProp) => {
     },
   });
 
+  const { mutate: updateComment, isPending: isUpdating } = useMutation({
+    mutationFn: async ({
+      commentId,
+      text,
+    }: {
+      commentId: string;
+      text: string;
+    }) => {
+      const res = await fetch(`/api/posts/${post._id}/comments/${commentId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Something went wrong");
+      }
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("Comment edited successfully");
+      setEditCommentId(null);
+      setEditCommentText("");
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
   const handleDeletePost = () => {
     deletePost();
   };
@@ -147,6 +183,21 @@ const OnePost = ({ post }: PostProp) => {
     e.preventDefault();
     if (isCommenting) return;
     commentPost();
+  };
+
+  const handleUpdateComment = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    if (isUpdating) return;
+
+    console.log("Comment ID:", editCommentId);
+    console.log("Comment Text:", editCommentText);
+
+    if (!editCommentId || !editCommentText) {
+      toast.error("Invalid comment data");
+      return;
+    }
+
+    updateComment({ commentId: editCommentId, text: editCommentText });
   };
 
   const handleLikePost = () => {
@@ -260,7 +311,7 @@ const OnePost = ({ post }: PostProp) => {
                 className="modal border-none outline-none"
               >
                 <div className="modal-box rounded border border-accent">
-                  <h3 className="font-heading font-primary text-lg mb-4">
+                  <h3 className="font-heading text-primary text-lg mb-4">
                     Comments
                   </h3>
                   <div className="flex flex-col gap-3 max-h-60 overflow-auto">
@@ -269,31 +320,88 @@ const OnePost = ({ post }: PostProp) => {
                         No comments yet, start bantering!
                       </p>
                     )}
-                    {post.comments.map((comment) => (
-                      <div key={comment._id} className="flex gap-2 items-start">
-                        <div className="avatar">
-                          <div className="w-8 rounded-full">
-                            <img
-                              src={
-                                comment.user.profileImg ||
-                                "/Placeholder_avatar.png"
-                              }
-                            />
+                    {post.comments.map((comment) => {
+                      const isMyComment =
+                        authCheck?.userName === comment.user.userName;
+                      console.log(authCheck?._id, comment.user.userName);
+                      return (
+                        <div
+                          key={comment._id}
+                          className="flex gap-2 items-start"
+                        >
+                          <div className="avatar">
+                            <div className="w-8 rounded-full">
+                              <img
+                                src={
+                                  comment.user.profileImg ||
+                                  "/Placeholder_avatar.png"
+                                }
+                              />
+                            </div>
+                          </div>
+                          <div className="flex flex-col">
+                            <div className="flex items-center gap-1">
+                              <span className="font-bold">
+                                {comment.user.fullName}
+                              </span>
+                              <span className="text-gray-700 text-sm">
+                                @{comment.user.userName}
+                              </span>
+                            </div>
+                            <div className="text-sm flex flex-row">
+                              {comment.text}
+                              {isMyComment && (
+                                <>
+                                  <div>
+                                    <FaTrash />
+
+                                    <FaPen
+                                      className="flex flex-col ml-0 space-y-4 cursor-pointer"
+                                      onClick={() => {
+                                        setEditCommentId(comment._id); // Sätt commentId här
+                                        setEditCommentText(comment.text); // Om du vill fylla textfältet med den aktuella kommentaren
+                                        const modal = document.getElementById(
+                                          "commentOwner_modal" + comment._id
+                                        );
+                                        if (modal) {
+                                          (
+                                            modal as HTMLDialogElement
+                                          ).showModal();
+                                        }
+                                      }}
+                                    />
+                                  </div>
+                                  <dialog
+                                    id={`commentOwner_modal${comment._id}`}
+                                  >
+                                    <form
+                                      className="flex gap-2 items-center mt-4 border-t border-gray-600 pt-2"
+                                      onSubmit={handleUpdateComment}
+                                    >
+                                      <textarea
+                                        className="textarea w-full p-1 rounded text-md resize-none border focus:outline-none border-gray-800"
+                                        placeholder="Edit your comment..."
+                                        value={editCommentText}
+                                        onChange={(e) =>
+                                          setEditCommentText(e.target.value)
+                                        }
+                                      />
+                                      <button className="btn btn-primary rounded-full btn-sm text-white px-4">
+                                        {isUpdating ? (
+                                          <LoadingSpinner size="md" />
+                                        ) : (
+                                          "Save"
+                                        )}
+                                      </button>
+                                    </form>
+                                  </dialog>
+                                </>
+                              )}
+                            </div>
                           </div>
                         </div>
-                        <div className="flex flex-col">
-                          <div className="flex items-center gap-1">
-                            <span className="font-bold">
-                              {comment.user.fullName}
-                            </span>
-                            <span className="text-gray-700 text-sm">
-                              @{comment.user.userName}
-                            </span>
-                          </div>
-                          <div className="text-sm">{comment.text}</div>
-                        </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                   <form
                     className="flex gap-2 items-center mt-4 border-t border-gray-600 pt-2"

@@ -12,8 +12,10 @@ export default defineConfig({
       manifest: manifest,
       workbox: {
         globPatterns: ['**/*.{js, css, html, ico, svg, png, jpg, jpeg}']
-      }
-    })
+      },
+      devOptions: {
+        enabled: false,
+    }})
   ],
   server: {
     proxy: {
