@@ -4,6 +4,7 @@ import { FaUser } from "react-icons/fa";
 import { MdOutlineLogin } from "react-icons/md";
 import { FaHeart } from "react-icons/fa";
 import { FaBell } from "react-icons/fa";
+import { FaStar } from "react-icons/fa6";
 
 import { Link } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -54,11 +55,14 @@ const Navbar = () => {
         <Link to={"/search"} className="link link:hover">
           <FaSearch />
         </Link>
-        <Link to={"/liked"} className="link link:hover">
+        <Link to={"/home"} className="link link:hover">
           <FaHeart />
         </Link>
         <Link to={"/notifications"} className="link link:hover">
           <FaBell />
+        </Link>
+        <Link to={"/suggested"}>
+          <FaStar />
         </Link>
         <MdOutlineLogin
           className="w-5 h-5 cursor-pointer"
