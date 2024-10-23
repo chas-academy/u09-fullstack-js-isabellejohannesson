@@ -7,8 +7,6 @@ import Post from "../types/Post";
 import User from "../types/User";
 import { Link } from "react-router-dom";
 
-//HANDLEDNING: SERVERN KRASCHAR AV BILDUPPLADDNING, HJÄLP ATT KOLLA GRÄNSEN FÖR UPPLADDNING OCH ÖKA OM DET BEHÖVS
-
 const CreatePost = () => {
   const [formData, setFormData] = useState({
     text: "",
@@ -16,6 +14,7 @@ const CreatePost = () => {
   });
   const [isUrl, setIsUrl] = useState(true);
   const [img, setImg] = useState<string | null>(null);
+
   const imgRef = useRef<HTMLInputElement>(null);
 
   const { data: authCheck } = useQuery<User>({ queryKey: ["authCheck"] });
@@ -55,7 +54,6 @@ const CreatePost = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
     const postImg = isUrl ? formData.img : img;
     const newPost = {
       text: formData.text,

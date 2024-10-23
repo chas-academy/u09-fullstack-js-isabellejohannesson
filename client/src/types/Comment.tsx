@@ -1,4 +1,4 @@
-import User from "./user.tsx";
+import User from "./User.tsx";
 
 interface Comment {
   _id: string;
