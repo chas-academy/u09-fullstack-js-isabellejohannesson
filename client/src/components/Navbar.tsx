@@ -8,7 +8,7 @@ import { FaBell } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import User from "../types/user";
+import User from "../types/User";
 
 const Navbar = () => {
   const queryClient = useQueryClient();
