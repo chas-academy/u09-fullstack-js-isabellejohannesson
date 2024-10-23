@@ -69,7 +69,7 @@ const LoginView = () => {
           Log in
         </h2>
         <form onSubmit={handleSubmit}>
-          <label className="input input-bordered flex items-center gap-2 max-w-sm w-full my-2">
+          <label className="input input-bordered flex items-center gap-2 max-w-md w-full my-2">
             <FaUser />
             <input
               type="text"
@@ -80,7 +80,7 @@ const LoginView = () => {
               onChange={handleInputChange}
             />
           </label>
-          <label className="input input-bordered flex items-center gap-2 max-w-sm w-full my-2">
+          <label className="input input-bordered flex items-center gap-2 max-w-md w-full my-2">
             <FaLock />
             <input
               type="password"
