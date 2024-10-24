@@ -16,7 +16,9 @@ const Searchbar = () => {
   const { data: authCheck, isLoading: authLoading } = useQuery<User>({
     queryKey: ["authCheck"],
     queryFn: async () => {
-      const res = await fetch("/api/auth/authCheck");
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/auth/authCheck`
+      );
       if (!res.ok) {
         throw new Error("Failed to check auth");
       }
@@ -38,8 +40,8 @@ const Searchbar = () => {
     queryKey: ["searchResults", query],
     queryFn: async () => {
       const [usersRes, postsRes] = await Promise.all([
-        fetch(`/api/users/search?q=${query}`),
-        fetch(`/api/posts/search?q=${query}`),
+        fetch(`${import.meta.env.VITE_API_URL}/api/users/search?q=${query}`),
+        fetch(`${import.meta.env.VITE_API_URL}/api/posts/search?q=${query}`),
       ]);
 
       if (!usersRes.ok || !postsRes.ok) {

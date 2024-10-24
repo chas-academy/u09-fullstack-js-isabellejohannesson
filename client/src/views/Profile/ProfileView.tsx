@@ -1,5 +1,7 @@
 import Suggested from "../../components/Suggested";
 
+// fetch profile, followers och following + useFollow här
+
 const Profile = () => {
   return (
     <div className="flex flex-col justify-center overflow-y-auto px-4 my-4">

@@ -37,13 +37,16 @@ const SignUpView = () => {
       password: string;
     }) => {
       try {
-        const response = await fetch("/api/auth/signup", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newUser),
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/auth/signup`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newUser),
+          }
+        );
 
         if (!response.ok) {
           const errorResponse: ApiError = await response.json();

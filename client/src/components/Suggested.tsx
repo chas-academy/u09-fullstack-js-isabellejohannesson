@@ -12,7 +12,9 @@ const Suggested = () => {
     queryKey: ["suggestedUsers"],
     queryFn: async () => {
       try {
-        const res = await fetch("/api/users/suggested");
+        const res = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/users/suggested`
+        );
         const data = await res.json();
         if (!res.ok) {
           throw new Error(data.error || "Something went wrong!");

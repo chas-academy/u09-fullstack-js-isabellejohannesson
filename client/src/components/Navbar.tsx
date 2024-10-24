@@ -17,9 +17,12 @@ const Navbar = () => {
   const { mutate: logout } = useMutation({
     mutationFn: async () => {
       try {
-        const response = await fetch("/api/auth/logout", {
-          method: "POST",
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/logout`,
+          {
+            method: "POST",
+          }
+        );
         const data = await response.json();
         if (!response.ok) {
           throw new Error(data.error || "Something went wrong");

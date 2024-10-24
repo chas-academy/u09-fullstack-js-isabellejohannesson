@@ -23,7 +23,9 @@ function App() {
     queryKey: ["authCheck"],
     queryFn: async () => {
       try {
-        const res = await fetch("/api/auth/authCheck");
+        const res = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/auth/authCheck`
+        );
         const data = await res.json();
         if (data.error) return null; //reset authCheck-objektet, som annars bara blir tomt
         if (!res.ok) {
