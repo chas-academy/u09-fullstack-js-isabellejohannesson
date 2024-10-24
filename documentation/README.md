@@ -8,10 +8,15 @@ This is an application made for practice purposes as an assignment within an edu
 
 ### How to get started
 
-NPM install
-Npm run dev
+Clone repo
+npm install
+npm run dev
 
-Connection MongoDB -> string in Compass for DB access.
+### Important files
+
+Connection to db: server/db/connectMongoDB
+
+JWT: lib/utils/generateToken.js
 
 ### Contents of application
 
