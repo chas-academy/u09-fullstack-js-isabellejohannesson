@@ -1,10 +1,10 @@
-/* import { useLocation } from "react-router-dom"; */
-import { Link } from "react-router-dom";
+import { FaSearch } from "react-icons/fa";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
-  /*   const location = useLocation(); */
+  const location = useLocation();
 
-  /*   const routeNames: { [key: string]: string } = {
+  const routeNames: { [key: string]: string } = {
     "/": "/welcome",
     "/home": "Home",
     "/login": "Log in",
@@ -15,19 +15,22 @@ const Header = () => {
     "/search": "Search",
     "/create": "Create a post",
   };
- */
-  /*  const activeView = routeNames[location.pathname] || "Unknown page"; */
+
+  const activeView = routeNames[location.pathname] || "Unknown page";
 
   return (
     <>
-      <header className="flex justify-between items-center my-6 px-4 top-0">
-        {/*  <h1 className="text-md font-bold ">{activeView}</h1> */}
+      <header className="flex justify-end items-center my-6 px-4 top-0">
+        <h1 className="text-md font-bold ">{activeView}</h1>
         <Link to="/">
           <img
             src="../Logo/Banterly_Logo_3.svg"
             alt="Logo"
-            className="justify-ml-auto"
+            className="link link:hover justify-ml-auto px-2"
           />
+        </Link>
+        <Link to={"/search"} className="link link:hover justify-ml-auto px-2">
+          <FaSearch />
         </Link>
       </header>
     </>

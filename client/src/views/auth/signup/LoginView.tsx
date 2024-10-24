@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { FaLock, FaUser } from "react-icons/fa";
@@ -49,6 +49,7 @@ const LoginView = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["authCheck"] });
+      <Navigate to={"/home"} />;
     },
     onError: (error: Error) => {
       toast.error(error.message);

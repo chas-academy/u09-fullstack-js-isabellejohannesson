@@ -4,7 +4,7 @@ import { MdEmail } from "react-icons/md";
 import { FaLock } from "react-icons/fa";
 import { FaRepeat } from "react-icons/fa6";
 
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
@@ -66,6 +66,7 @@ const SignUpView = () => {
     },
     onSuccess: () => {
       toast.success("Account created successfully. Welcome to Banterly!");
+      <Navigate to={"/home"} />;
     },
   });
 

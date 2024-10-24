@@ -43,6 +43,7 @@ const OnePost = ({ post }: PostProp) => {
     handleDeletePost();
   };
 
+  // Delete Post
   const { mutate: deletePost, isPending: isDeleting } = useMutation({
     mutationFn: async () => {
       try {
@@ -70,10 +71,15 @@ const OnePost = ({ post }: PostProp) => {
     },
     onSuccess: () => {
       toast.success("Post deleted successfully");
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      queryClient.invalidateQueries({ queryKey: ["posts"] }); //Uppdatera state efter delete
     },
   });
 
+  const handleDeletePost = () => {
+    deletePost();
+  };
+
+  //Like post
   const { mutate: likePost, isPending: isLiking } = useMutation({
     mutationFn: async () => {
       try {
@@ -113,6 +119,12 @@ const OnePost = ({ post }: PostProp) => {
     },
   });
 
+  const handleLikePost = () => {
+    if (isLiking) return;
+    likePost();
+  };
+
+  //Create comment
   const { mutate: commentPost, isPending: isCommenting } = useMutation({
     mutationFn: async () => {
       try {
@@ -152,6 +164,13 @@ const OnePost = ({ post }: PostProp) => {
     },
   });
 
+  const handlePostComment = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    if (isCommenting) return;
+    commentPost();
+  };
+
+  //Edit comment text
   const { mutate: updateComment, isPending: isUpdating } = useMutation({
     mutationFn: async ({
       commentId,
@@ -189,22 +208,9 @@ const OnePost = ({ post }: PostProp) => {
     },
   });
 
-  const handleDeletePost = () => {
-    deletePost();
-  };
-
-  const handlePostComment = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    if (isCommenting) return;
-    commentPost();
-  };
-
   const handleUpdateComment = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (isUpdating) return;
-
-    console.log("Comment ID:", editCommentId);
-    console.log("Comment Text:", editCommentText);
 
     if (!editCommentId || !editCommentText) {
       toast.error("Invalid comment data");
@@ -214,9 +220,43 @@ const OnePost = ({ post }: PostProp) => {
     updateComment({ commentId: editCommentId, text: editCommentText });
   };
 
-  const handleLikePost = () => {
-    if (isLiking) return;
-    likePost();
+  const { mutate: deleteComment, isPending: isDeletingComment } = useMutation({
+    mutationFn: async (commentId: string) => {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/posts/${
+          post._id
+        }/comments/${commentId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Something went wrong");
+      }
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("Comment deleted successfully");
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const handleDeleteComment = (commentId: string) => {
+    if (isDeletingComment) return;
+
+    if (!commentId) {
+      toast.error("Comment not found");
+      return;
+    }
+
+    deleteComment(commentId);
   };
 
   return (
@@ -367,13 +407,17 @@ const OnePost = ({ post }: PostProp) => {
                               {isMyComment && (
                                 <>
                                   <div>
-                                    <FaTrash />
+                                    <FaTrash
+                                      onClick={() => {
+                                        handleDeleteComment(comment._id);
+                                      }}
+                                    />
 
                                     <FaPen
                                       className="flex flex-col ml-0 space-y-4 cursor-pointer"
                                       onClick={() => {
-                                        setEditCommentId(comment._id); // Sätt commentId här
-                                        setEditCommentText(comment.text); // Om du vill fylla textfältet med den aktuella kommentaren
+                                        setEditCommentId(comment._id);
+                                        setEditCommentText(comment.text);
                                         const modal = document.getElementById(
                                           "commentOwner_modal" + comment._id
                                         );
