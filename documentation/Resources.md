@@ -1,3 +1,7 @@
+## Deployed version
+
+https://banterly.netlify.app/
+
 ## UX
 
 ### Lo-Fi-skisser
