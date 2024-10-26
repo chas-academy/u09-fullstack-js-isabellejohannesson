@@ -18,7 +18,7 @@ const Navbar = () => {
     mutationFn: async () => {
       try {
         const response = await fetch(
-          `https://banterly.onrender.com/api/logout`,
+          `${import.meta.env.VITE_API_URL}/api/logout`,
           {
             method: "POST",
           }

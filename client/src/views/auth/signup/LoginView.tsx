@@ -25,7 +25,7 @@ const LoginView = () => {
   } = useMutation({
     mutationFn: async (formData: FormData) => {
       const response = await fetch(
-        `https://banterly.onrender.com/api/auth/login`,
+        `${import.meta.env.VITE_API_URL}/api/auth/login`,
         {
           method: "POST",
           headers: {

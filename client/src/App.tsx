@@ -24,7 +24,7 @@ function App() {
     queryFn: async () => {
       try {
         const res = await fetch(
-          `https://banterly.onrender.com/api/auth/authCheck`
+          `${import.meta.env.VITE_API_URL}/api/auth/authCheck`
         );
         const data = await res.json();
         if (data.error) return null; //reset authCheck-objektet, som annars bara blir tomt

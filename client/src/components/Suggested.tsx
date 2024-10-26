@@ -13,7 +13,7 @@ const Suggested = () => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          `https://banterly.onrender.com/api/users/suggested`
+          `${import.meta.env.VITE_API_URL}/api/users/suggested`
         );
         const data = await res.json();
         if (!res.ok) {

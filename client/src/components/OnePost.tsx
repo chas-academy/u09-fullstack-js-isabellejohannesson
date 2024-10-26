@@ -48,7 +48,7 @@ const OnePost = ({ post }: PostProp) => {
     mutationFn: async () => {
       try {
         const res = await fetch(
-          `https://banterly.onrender.com/api/posts/${post._id}`,
+          `${import.meta.env.VITE_API_URL}/api/posts/${post._id}`,
           {
             method: "DELETE",
           }
@@ -84,7 +84,7 @@ const OnePost = ({ post }: PostProp) => {
     mutationFn: async () => {
       try {
         const res = await fetch(
-          `https://banterly.onrender.com/api/posts/like/${post._id}`,
+          `${import.meta.env.VITE_API_URL}/api/posts/like/${post._id}`,
           {
             method: "POST",
           }
@@ -129,7 +129,7 @@ const OnePost = ({ post }: PostProp) => {
     mutationFn: async () => {
       try {
         const res = await fetch(
-          `https://banterly.onrender.com/api/posts/comment/${post._id}`,
+          `${import.meta.env.VITE_API_URL}/api/posts/comment/${post._id}`,
           {
             method: "POST",
             headers: {
@@ -180,7 +180,9 @@ const OnePost = ({ post }: PostProp) => {
       text: string;
     }) => {
       const res = await fetch(
-        `https://banterly.onrender.com/api/posts/${post._id}/comments/${commentId}`,
+        `${import.meta.env.VITE_API_URL}/api/posts/${
+          post._id
+        }/comments/${commentId}`,
         {
           method: "PUT",
           headers: {
@@ -221,7 +223,9 @@ const OnePost = ({ post }: PostProp) => {
   const { mutate: deleteComment, isPending: isDeletingComment } = useMutation({
     mutationFn: async (commentId: string) => {
       const res = await fetch(
-        `https://banterly.onrender.com/api/posts/${post._id}/comments/${commentId}`,
+        `${import.meta.env.VITE_API_URL}/api/posts/${
+          post._id
+        }/comments/${commentId}`,
         {
           method: "DELETE",
           headers: {

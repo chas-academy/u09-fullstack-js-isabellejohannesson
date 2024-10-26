@@ -17,7 +17,7 @@ const Searchbar = () => {
     queryKey: ["authCheck"],
     queryFn: async () => {
       const res = await fetch(
-        `https://banterly.onrender.com/api/auth/authCheck`
+        `${import.meta.env.VITE_API_URL}/api/auth/authCheck`
       );
       if (!res.ok) {
         throw new Error("Failed to check auth");
@@ -40,8 +40,8 @@ const Searchbar = () => {
     queryKey: ["searchResults", query],
     queryFn: async () => {
       const [usersRes, postsRes] = await Promise.all([
-        fetch(`https://banterly.onrender.com/api/users/search?q=${query}`),
-        fetch(`https://banterly.onrender.com/api/posts/search?q=${query}`),
+        fetch(`${import.meta.env.VITE_API_URL}/api/users/search?q=${query}`),
+        fetch(`${import.meta.env.VITE_API_URL}/api/posts/search?q=${query}`),
       ]);
 
       if (!usersRes.ok || !postsRes.ok) {

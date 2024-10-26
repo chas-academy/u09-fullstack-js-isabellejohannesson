@@ -28,7 +28,7 @@ const CreatePost = () => {
   } = useMutation({
     mutationFn: async (newPost: { text: string; img: string }) => {
       const response = await fetch(
-        "https://banterly.onrender.com/api/posts/create",
+        `${import.meta.env.VITE_API_URL}/api/posts/create`,
         {
           method: "POST",
           headers: {
