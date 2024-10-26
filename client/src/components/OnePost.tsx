@@ -3,11 +3,11 @@ import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 
-import LoadingSpinner from "./loadingSpinner";
-
 import { FaRegComment, FaRegHeart, FaTrash, FaPen } from "react-icons/fa";
 
 import { formatPostDate } from "../utils/formatPostDate";
+
+import LoadingSpinner from "./LoadingSpinner";
 
 import type Post from "../types/Post";
 import type User from "../types/User";
@@ -48,7 +48,7 @@ const OnePost = ({ post }: PostProp) => {
     mutationFn: async () => {
       try {
         const res = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/posts/${post._id}`,
+          `https://banterly.onrender.com/api/posts/${post._id}`,
           {
             method: "DELETE",
           }
@@ -84,7 +84,7 @@ const OnePost = ({ post }: PostProp) => {
     mutationFn: async () => {
       try {
         const res = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/posts/like/${post._id}`,
+          `https://banterly.onrender.com/api/posts/like/${post._id}`,
           {
             method: "POST",
           }
@@ -129,7 +129,7 @@ const OnePost = ({ post }: PostProp) => {
     mutationFn: async () => {
       try {
         const res = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/posts/comment/${post._id}`,
+          `https://banterly.onrender.com/api/posts/comment/${post._id}`,
           {
             method: "POST",
             headers: {
@@ -180,9 +180,7 @@ const OnePost = ({ post }: PostProp) => {
       text: string;
     }) => {
       const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/posts/${
-          post._id
-        }/comments/${commentId}`,
+        `https://banterly.onrender.com/api/posts/${post._id}/comments/${commentId}`,
         {
           method: "PUT",
           headers: {
@@ -223,9 +221,7 @@ const OnePost = ({ post }: PostProp) => {
   const { mutate: deleteComment, isPending: isDeletingComment } = useMutation({
     mutationFn: async (commentId: string) => {
       const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/posts/${
-          post._id
-        }/comments/${commentId}`,
+        `https://banterly.onrender.com/api/posts/${post._id}/comments/${commentId}`,
         {
           method: "DELETE",
           headers: {

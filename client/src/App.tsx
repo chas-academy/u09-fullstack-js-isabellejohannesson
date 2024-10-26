@@ -13,7 +13,7 @@ import Suggested from "./components/Suggested";
 import LikedPosts from "./components/LikedPosts";
 import Searchbar from "./components/Searchbar";
 import Header from "./components/Header";
-import LoadingSpinner from "./components/loadingSpinner";
+import LoadingSpinner from "./components/LoadingSpinner";
 
 import { useQuery } from "@tanstack/react-query";
 import toast, { Toaster } from "react-hot-toast";
@@ -24,7 +24,7 @@ function App() {
     queryFn: async () => {
       try {
         const res = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/auth/authCheck`
+          `https://banterly.onrender.com/api/auth/authCheck`
         );
         const data = await res.json();
         if (data.error) return null; //reset authCheck-objektet, som annars bara blir tomt

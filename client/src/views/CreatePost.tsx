@@ -27,13 +27,16 @@ const CreatePost = () => {
     error,
   } = useMutation({
     mutationFn: async (newPost: { text: string; img: string }) => {
-      const response = await fetch("/api/posts/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newPost),
-      });
+      const response = await fetch(
+        "https://banterly.onrender.com/api/posts/create",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newPost),
+        }
+      );
       if (!response.ok) {
         throw new Error("Failed to create post");
       }

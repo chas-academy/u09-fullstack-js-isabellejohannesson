@@ -7,7 +7,7 @@ import type User from "../types/User";
 import type Post from "../types/Post";
 
 import Suggested from "./Suggested";
-import LoadingSpinner from "./loadingSpinner";
+import LoadingSpinner from "./LoadingSpinner";
 
 const Searchbar = () => {
   const [query, setQuery] = useState<string>("");
@@ -17,7 +17,7 @@ const Searchbar = () => {
     queryKey: ["authCheck"],
     queryFn: async () => {
       const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/auth/authCheck`
+        `https://banterly.onrender.com/api/auth/authCheck`
       );
       if (!res.ok) {
         throw new Error("Failed to check auth");
@@ -40,8 +40,8 @@ const Searchbar = () => {
     queryKey: ["searchResults", query],
     queryFn: async () => {
       const [usersRes, postsRes] = await Promise.all([
-        fetch(`${import.meta.env.VITE_API_URL}/api/users/search?q=${query}`),
-        fetch(`${import.meta.env.VITE_API_URL}/api/posts/search?q=${query}`),
+        fetch(`https://banterly.onrender.com/api/users/search?q=${query}`),
+        fetch(`https://banterly.onrender.com/api/posts/search?q=${query}`),
       ]);
 
       if (!usersRes.ok || !postsRes.ok) {

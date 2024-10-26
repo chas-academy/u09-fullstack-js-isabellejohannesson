@@ -1,5 +1,5 @@
 import FollowSkeleton from "./skeletons/PostSkeleton.tsx";
-import LoadingSpinner from "./loadingSpinner.tsx";
+import LoadingSpinner from "./LoadingSpinner.tsx";
 
 import useFollow from "../hooks/useFollow.tsx";
 import User from "../types/User.tsx";
@@ -13,7 +13,7 @@ const Suggested = () => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/users/suggested`
+          `https://banterly.onrender.com/api/users/suggested`
         );
         const data = await res.json();
         if (!res.ok) {

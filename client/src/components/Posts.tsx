@@ -20,15 +20,15 @@ const Posts = ({ feedType, userName, _id }: PostProps) => {
   const getPostEndpoint = () => {
     switch (feedType) {
       case "forYou":
-        return `${import.meta.env.VITE_API_URL}/api/posts/all`;
+        return `https://banterly.onrender.com/api/posts/all`;
       case "following":
-        return `${import.meta.env.VITE_API_URL}/api/posts/following`;
+        return `https://banterly.onrender.com/api/posts/following`;
       case "posts":
-        return `${import.meta.env.VITE_API_URL}/api/posts/user/${userName}`;
+        return `https://banterly.onrender.com/api/posts/user/${userName}`;
       case "likes":
-        return `${import.meta.env.VITE_API_URL}/api/posts/likes/${_id}`;
+        return `https://banterly.onrender.com/api/posts/likes/${_id}`;
       default:
-        return `${import.meta.env.VITE_API_URL}/api/posts/all`;
+        return `https://banterly.onrender.com/api/posts/all`;
     }
   };
 

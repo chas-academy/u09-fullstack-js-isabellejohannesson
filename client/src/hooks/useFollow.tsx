@@ -8,7 +8,7 @@ const useFollow = () => {
     mutationFn: async (userId: string) => {
       try {
         const res = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/users/follow/${userId}`,
+          `https://banterly.onrender.com/api/users/follow/${userId}`,
           {
             method: "POST",
           }

@@ -38,7 +38,7 @@ const SignUpView = () => {
     }) => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/auth/signup`,
+          `https://banterly.onrender.com/api/auth/signup`,
           {
             method: "POST",
             headers: {

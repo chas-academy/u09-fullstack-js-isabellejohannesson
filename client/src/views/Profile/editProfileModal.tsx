@@ -1,1 +1,5 @@
-// fetch update profile här - form modal
+const editProfileModal = () => {
+  return <div>editProfileModal</div>;
+};
+
+export default editProfileModal;
