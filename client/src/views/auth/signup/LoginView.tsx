@@ -35,6 +35,7 @@ const LoginView = () => {
             userName: formData.userName,
             password: formData.password,
           }),
+          credentials: "include",
         }
       );
 
