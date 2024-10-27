@@ -18,7 +18,7 @@ const Navbar = () => {
     mutationFn: async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/logout`,
+          `${import.meta.env.VITE_API_URL}/api/auth/logout`,
           {
             method: "POST",
             credentials: "include",
