@@ -59,7 +59,7 @@ const Navbar = () => {
         <Link to={"/search"} className="link link:hover">
           <FaSearch />
         </Link>
-        <Link to={"/home"} className="link link:hover">
+        <Link to={"/liked"} className="link link:hover">
           <FaHeart />
         </Link>
         <Link to={"/notifications"} className="link link:hover">
