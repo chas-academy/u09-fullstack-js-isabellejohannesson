@@ -6,7 +6,7 @@ import { FaHeart } from "react-icons/fa";
 import { FaBell } from "react-icons/fa";
 import { FaStar } from "react-icons/fa6";
 
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import User from "../types/User";
@@ -40,6 +40,7 @@ const Navbar = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["authCheck"] });
+      <Navigate to="/" />;
     },
   });
   const { data: authCheck } = useQuery<User>({ queryKey: ["authCheck"] });
