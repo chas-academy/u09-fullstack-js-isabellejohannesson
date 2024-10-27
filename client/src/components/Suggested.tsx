@@ -1,5 +1,5 @@
 import FollowSkeleton from "./skeletons/PostSkeleton.tsx";
-import LoadingSpinner from "./LoadingSpinner.tsx";
+import ProcessingWheel from "./ProcessingWheel.tsx";
 
 import useFollow from "../hooks/useFollow.tsx";
 import User from "../types/User.tsx";
@@ -75,7 +75,7 @@ const Suggested = () => {
                     follow(user._id);
                   }}
                 >
-                  {isPending ? <LoadingSpinner size="sm" /> : "Follow"}
+                  {isPending ? <ProcessingWheel size="sm" /> : "Follow"}
                 </button>
               </div>
             </Link>

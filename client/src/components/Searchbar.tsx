@@ -7,7 +7,7 @@ import type User from "../types/User";
 import type Post from "../types/Post";
 
 import Suggested from "./Suggested";
-import LoadingSpinner from "./LoadingSpinner";
+import ProcessingWheel from "./ProcessingWheel";
 
 const Searchbar = () => {
   const [query, setQuery] = useState<string>("");
@@ -94,7 +94,7 @@ const Searchbar = () => {
           </form>
         </div>
 
-        {authLoading && <LoadingSpinner />}
+        {authLoading && <ProcessingWheel />}
 
         {(searchLoading || !searchResults) && query && <p>Searching...</p>}
 

@@ -7,7 +7,7 @@ import { FaRegComment, FaRegHeart, FaTrash, FaPen } from "react-icons/fa";
 
 import { formatPostDate } from "../utils/formatPostDate";
 
-import LoadingSpinner from "./LoadingSpinner";
+import ProcessingWheel from "./ProcessingWheel";
 
 import type Post from "../types/Post";
 import type User from "../types/User";
@@ -323,7 +323,7 @@ const OnePost = ({ post }: PostProp) => {
                   </>
                 )}
 
-                {isDeleting && <LoadingSpinner size="sm" />}
+                {isDeleting && <ProcessingWheel size="sm" />}
               </span>
             )}
           </div>
@@ -446,7 +446,7 @@ const OnePost = ({ post }: PostProp) => {
                                       />
                                       <button className="btn btn-primary rounded-full btn-sm text-white px-4">
                                         {isUpdating ? (
-                                          <LoadingSpinner size="md" />
+                                          <ProcessingWheel size="md" />
                                         ) : (
                                           "Save"
                                         )}
@@ -472,7 +472,7 @@ const OnePost = ({ post }: PostProp) => {
                       onChange={(e) => setComment(e.target.value)}
                     />
                     <button className="btn btn-primary rounded-full btn-sm text-white px-4">
-                      {isCommenting ? <LoadingSpinner size="md" /> : "Post"}
+                      {isCommenting ? <ProcessingWheel size="md" /> : "Post"}
                     </button>
                   </form>
                 </div>
@@ -485,7 +485,7 @@ const OnePost = ({ post }: PostProp) => {
                 className="flex gap-1 items-center group cursor-pointer"
                 onClick={handleLikePost}
               >
-                {isLiking && <LoadingSpinner size="sm" />}
+                {isLiking && <ProcessingWheel size="sm" />}
                 {!isLiked && !isLiking && (
                   <FaRegHeart className="w-4 h-4 cursor-pointer text-slate-500 group-hover:text-pink-500" />
                 )}

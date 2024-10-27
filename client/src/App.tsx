@@ -13,7 +13,7 @@ import Suggested from "./components/Suggested";
 import LikedPosts from "./components/LikedPosts";
 import Searchbar from "./components/Searchbar";
 import Header from "./components/Header";
-import LoadingSpinner from "./components/LoadingSpinner";
+import ProcessingWheel from "./components/ProcessingWheel";
 
 import { useQuery } from "@tanstack/react-query";
 import toast, { Toaster } from "react-hot-toast";
@@ -49,7 +49,7 @@ function App() {
   if (isLoading) {
     return (
       <div className="h-screen flex justify-center items-center">
-        <LoadingSpinner size="lg" />
+        <ProcessingWheel size="lg" />
       </div>
     );
   }
