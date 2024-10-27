@@ -21,6 +21,7 @@ const Navbar = () => {
           `${import.meta.env.VITE_API_URL}/api/logout`,
           {
             method: "POST",
+            credentials: "include",
           }
         );
         const data = await response.json();

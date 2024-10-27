@@ -13,7 +13,10 @@ const Suggested = () => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/users/suggested`
+          `${import.meta.env.VITE_API_URL}/api/users/suggested`,
+          {
+            credentials: "include",
+          }
         );
         const data = await res.json();
         if (!res.ok) {

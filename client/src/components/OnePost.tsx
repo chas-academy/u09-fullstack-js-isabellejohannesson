@@ -51,6 +51,7 @@ const OnePost = ({ post }: PostProp) => {
           `${import.meta.env.VITE_API_URL}/api/posts/${post._id}`,
           {
             method: "DELETE",
+            credentials: "include",
           }
         );
         const data = await res.json();
@@ -87,6 +88,7 @@ const OnePost = ({ post }: PostProp) => {
           `${import.meta.env.VITE_API_URL}/api/posts/like/${post._id}`,
           {
             method: "POST",
+            credentials: "include",
           }
         );
         const data = await res.json();
@@ -134,6 +136,7 @@ const OnePost = ({ post }: PostProp) => {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
+              credentials: "include",
             },
             body: JSON.stringify({ text: comment }),
           }
@@ -187,6 +190,7 @@ const OnePost = ({ post }: PostProp) => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            credentials: "include",
           },
           body: JSON.stringify({ text }),
         }
@@ -231,6 +235,7 @@ const OnePost = ({ post }: PostProp) => {
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include",
         }
       );
       const data = await res.json();

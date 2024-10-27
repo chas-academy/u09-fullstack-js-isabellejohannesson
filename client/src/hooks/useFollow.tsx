@@ -11,6 +11,7 @@ const useFollow = () => {
           `${import.meta.env.VITE_API_URL}/api/users/follow/${userId}`,
           {
             method: "POST",
+            credentials: "include",
           }
         );
 

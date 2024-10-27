@@ -1,5 +1,6 @@
 const LikedPosts = () => {
   return (
+    // KOM IHÅG             credentials: "include",
     <div className="flex flex-col justify-center overflow-y-auto px-4 my-4">
       <div>Member since (show created at) + Following</div>
     </div>

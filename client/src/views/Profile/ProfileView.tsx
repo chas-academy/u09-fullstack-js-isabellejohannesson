@@ -1,6 +1,7 @@
 import Suggested from "../../components/Suggested";
 
 // fetch profile, followers och following + useFollow här
+// GLÖM INTE             credentials: "include",
 
 const Profile = () => {
   return (

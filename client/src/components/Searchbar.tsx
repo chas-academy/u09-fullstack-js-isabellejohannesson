@@ -17,7 +17,10 @@ const Searchbar = () => {
     queryKey: ["authCheck"],
     queryFn: async () => {
       const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/auth/authCheck`
+        `${import.meta.env.VITE_API_URL}/api/auth/authCheck`,
+        {
+          credentials: "include",
+        }
       );
       if (!res.ok) {
         throw new Error("Failed to check auth");
