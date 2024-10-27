@@ -136,8 +136,8 @@ const OnePost = ({ post }: PostProp) => {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              credentials: "include",
             },
+            credentials: "include",
             body: JSON.stringify({ text: comment }),
           }
         );
@@ -190,8 +190,8 @@ const OnePost = ({ post }: PostProp) => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            credentials: "include",
           },
+          credentials: "include",
           body: JSON.stringify({ text }),
         }
       );
