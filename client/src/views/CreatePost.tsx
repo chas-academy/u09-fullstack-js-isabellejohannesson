@@ -33,8 +33,8 @@ const CreatePost = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            credentials: "include",
           },
+          credentials: "include",
           body: JSON.stringify(newPost),
         }
       );
