@@ -41,7 +41,7 @@ const Navbar = () => {
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["authCheck"] });
+      queryClient.setQueryData(["authCheck"], null);
       navigate("/");
     },
   });
@@ -68,7 +68,7 @@ const Navbar = () => {
         <Link to={"/notifications"} className="link link:hover">
           <FaBell />
         </Link>
-        <Link to={"/suggested"}>
+        <Link to={"/suggested"} className="link link:hover">
           <FaStar />
         </Link>
         <MdOutlineLogin
