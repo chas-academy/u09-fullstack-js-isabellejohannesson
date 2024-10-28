@@ -9,19 +9,31 @@ const HomeView = () => {
   return (
     <>
       <CreatePost />
-      <div className="flex flex-col items-center max-w-2xl mx-auto px-4">
-        <div
-          className="flex justify-center flex-1 p-3 hover:bg-secondary transition duration-300 cursor-pointer relative"
-          onClick={() => setFeedType("forYou")}
-        >
-          For you
+      <div className="dropdown">
+        <div tabIndex={0} role="button" className="btn m-1 bg-accent">
+          {feedType ? "forYou" : "following"}
         </div>
-        <div
-          className="flex justify-center flex-1 p-3 hover:bg-secondary transition duration-300 cursor-pointer relative"
-          onClick={() => setFeedType("following")}
+        <ul
+          tabIndex={0}
+          className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
         >
-          Following
-        </div>
+          <li>
+            <a
+              className="flex justify-center flex-1 p-3 hover:bg-secondary transition duration-300 cursor-pointer relative"
+              onClick={() => setFeedType("forYou")}
+            >
+              For you
+            </a>
+          </li>
+          <li>
+            <a
+              className="flex justify-center flex-1 p-3 hover:bg-secondary transition duration-300 cursor-pointer relative"
+              onClick={() => setFeedType("following")}
+            >
+              Following
+            </a>
+          </li>
+        </ul>
       </div>
 
       <Posts feedType={feedType} />
