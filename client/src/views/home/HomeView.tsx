@@ -10,8 +10,8 @@ const HomeView = () => {
     <>
       <CreatePost />
       <div className="dropdown">
-        <div tabIndex={0} role="button" className="btn m-1 bg-accent">
-          {feedType ? "forYou" : "following"}
+        <div tabIndex={0} role="button" className="btn btn-secondary">
+          {feedType === "forYou" ? "For You" : "Following"}
         </div>
         <ul
           tabIndex={0}

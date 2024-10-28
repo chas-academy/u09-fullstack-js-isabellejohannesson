@@ -411,15 +411,16 @@ const OnePost = ({ post }: PostProp) => {
                               {comment.text}
                               {isMyComment && (
                                 <>
-                                  <div>
+                                  <div className="flex flex-col ml-0 space-y-4">
                                     <FaTrash
+                                      className="cursor-pointer"
                                       onClick={() => {
                                         handleDeleteComment(comment._id);
                                       }}
                                     />
 
                                     <FaPen
-                                      className="flex flex-col ml-0 space-y-4 cursor-pointer"
+                                      className="cursor-pointer"
                                       onClick={() => {
                                         setEditCommentId(comment._id);
                                         setEditCommentText(comment.text);
