@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 
 import ProcessingWheel from "../components/ProcessingWheel";
@@ -11,6 +12,8 @@ import { FaHeart } from "react-icons/fa6";
 import type Notification from "../types/Notifications";
 
 const NotificationsView = () => {
+  const queryClient = useQueryClient();
+
   const { data: notifications, isLoading } = useQuery({
     queryKey: ["notifications"],
     queryFn: async () => {
@@ -62,6 +65,7 @@ const NotificationsView = () => {
     },
     onSuccess: () => {
       toast.success("Notifications deleted successfully");
+      queryClient.invalidateQueries({ queryKey: ["notifications"] });
     },
     onError: (error) => {
       toast.error(error.message);
@@ -69,7 +73,7 @@ const NotificationsView = () => {
   });
 
   return (
-    <div className="wrapper flex flex-col justify-center overflow-y-auto max-w-2xl p-4">
+    <div className="wrapper flex flex-col">
       <div className="flex justify-between items-center p-4 border-b border-primary">
         <p className="font-bold">Notifications</p>
         <div className="dropdown ">
