@@ -14,6 +14,7 @@ const Header = () => {
     "/liked": "Liked Posts by you",
     "/search": "Search",
     "/create": "Create a post",
+    "/notifications": "Notifications",
   };
 
   const activeView = routeNames[location.pathname] || "Unknown page";

@@ -12,7 +12,6 @@ import ProcessingWheel from "./ProcessingWheel";
 const Searchbar = () => {
   const [query, setQuery] = useState<string>("");
 
-  // Kontrollerar om användaren är inloggad
   const { data: authCheck, isLoading: authLoading } = useQuery<User>({
     queryKey: ["authCheck"],
     queryFn: async () => {
@@ -43,7 +42,7 @@ const Searchbar = () => {
     queryKey: ["searchResults", query],
     queryFn: async () => {
       const [usersRes, postsRes] = await Promise.all([
-        fetch(`${import.meta.env.VITE_API_URL}/api/users/search?q=${query},`, {
+        fetch(`${import.meta.env.VITE_API_URL}/api/users/search?q=${query}`, {
           credentials: "include",
         }),
         fetch(`${import.meta.env.VITE_API_URL}/api/posts/search?q=${query}`, {

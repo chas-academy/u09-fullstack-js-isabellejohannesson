@@ -70,7 +70,7 @@ const NotificationsView = () => {
 
   return (
     <div className="wrapper flex flex-col justify-center overflow-y-auto max-w-2xl p-4">
-      <div className="flex justify-between items-center p-4 border-b border-gray-700">
+      <div className="flex justify-between items-center p-4 border-b border-primary">
         <p className="font-bold">Notifications</p>
         <div className="dropdown ">
           <div tabIndex={0} role="button" className="m-1">
@@ -78,9 +78,9 @@ const NotificationsView = () => {
           </div>
           <ul
             tabIndex={0}
-            className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+            className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-auto"
           >
-            <li>
+            <li className="flex items-center">
               <a onClick={() => deleteNotifications()}>
                 Delete all notifications
               </a>
