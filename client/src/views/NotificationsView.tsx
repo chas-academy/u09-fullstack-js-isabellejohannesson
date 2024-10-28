@@ -41,7 +41,7 @@ const NotificationsView = () => {
     mutationFn: async () => {
       try {
         const res = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/notifications`,
+          `${import.meta.env.VITE_API_URL}/api/notifications/delete`,
           {
             method: "DELETE",
             credentials: "include",
