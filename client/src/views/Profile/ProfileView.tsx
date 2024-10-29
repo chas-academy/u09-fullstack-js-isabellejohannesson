@@ -43,6 +43,7 @@ const ProfileView = () => {
         if (!res.ok) {
           throw new Error(data.error || "Something went wrong");
         }
+        console.log("Från profile-fetch: ", data);
         return data;
       } catch (error) {
         if (error instanceof Error) {
