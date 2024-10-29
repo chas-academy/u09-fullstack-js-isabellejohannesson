@@ -42,7 +42,7 @@ const Navbar = () => {
     },
     onSuccess: () => {
       queryClient.setQueryData(["authCheck"], null);
-      navigate("/");
+      navigate("/home");
     },
   });
   const { data: authCheck } = useQuery<User>({ queryKey: ["authCheck"] });
