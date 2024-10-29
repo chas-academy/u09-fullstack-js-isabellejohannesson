@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import toast from "react-hot-toast";
 
 import type Post from "../types/Post.tsx";
-import type User from "../types/User.tsx";
 
 import OnePost from "./OnePost.tsx";
 
@@ -12,8 +11,8 @@ type FeedType = string;
 
 interface PostProps {
   feedType: FeedType;
-  userName?: User;
-  _id?: Post;
+  userName?: string;
+  _id?: string;
 }
 
 const Posts = ({ feedType, userName, _id }: PostProps) => {

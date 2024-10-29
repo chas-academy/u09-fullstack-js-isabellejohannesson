@@ -76,7 +76,7 @@ const Searchbar = () => {
     }
 
     if (query) {
-      search(); // Starta sökningen
+      search();
     }
   };
 
@@ -121,7 +121,7 @@ const Searchbar = () => {
             <ul>
               {searchResults.posts.map((post) => (
                 <li key={post._id}>
-                  <a href={`/posts/${post._id}`}>{post.text}</a>
+                  <a href={`/posts/${post.user._id}`}>{post.text}</a>
                 </li>
               ))}
             </ul>

@@ -21,16 +21,17 @@ const Header = () => {
 
   return (
     <>
-      <header className="flex justify-end items-center my-6 px-4 top-0">
-        <h1 className="text-md font-bold ">{activeView}</h1>
+      <header className="flex flex-row items-center my-6 px-4 top-0">
+        <h1 className="text-xs font-bold text-accent justify-start">
+          {activeView}
+        </h1>
         <Link to="/">
-          <img
-            src="../Logo/Banterly_Logo_3.svg"
-            alt="Logo"
-            className="link link:hover justify-ml-auto px-2"
-          />
+          <h1 className="font-heading text-primary justify-center">Banterly</h1>
         </Link>
-        <Link to={"/search"} className="link link:hover justify-ml-auto px-2">
+        <Link
+          to={"/search"}
+          className="link link:hover justify-ml-auto px-2 justify-end"
+        >
           <FaSearch />
         </Link>
       </header>
