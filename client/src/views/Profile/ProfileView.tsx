@@ -18,6 +18,8 @@ const ProfileView = () => {
 
   const profileImgRef = useRef<HTMLInputElement>(null);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const { userName } = useParams();
 
   const { follow, isPending } = useFollow();
@@ -117,16 +119,15 @@ const ProfileView = () => {
               </div>
             </div>
           </div>
-          {/*profileImg and Edit Button */}
-          <div
-            className="Profile-img-container flex flex-col items-center"
-            onClick={() => profileImgRef.current?.click()}
-          >
-            <img
-              src={user?.profileImg}
-              alt={"/Placeholder_avatar"}
-              className="w-28 h-28 rounded-full border-2 border-gray-300"
-            />
+          {/*profileImg and Edit */}
+          <div className="Profile-img-container flex flex-col items-center cursor-pointer">
+            <div onClick={() => profileImgRef.current?.click()}>
+              <img
+                src={profileImg || user?.profileImg}
+                alt="../../../Placeholder_avatar"
+                className="w-28 h-28 rounded-full border-primary p-2"
+              />
+            </div>
 
             {!isMyProfile && (
               <button
@@ -148,26 +149,29 @@ const ProfileView = () => {
                   ref={profileImgRef}
                   onChange={(e) => handleImgChange(e, "profileImg")}
                 />
+                {/* Edit Profile Modal and Button */}
                 {isMyProfile && authCheck && (
-                  <EditProfileModal authCheck={authCheck} />
+                  <>
+                    <button
+                      className="btn btn-primary rounded-full btn-sm text-white px-4 ml-2 my-4"
+                      onClick={() => setIsModalOpen(true)}
+                    >
+                      Update Profile
+                    </button>
+
+                    {isModalOpen && (
+                      <EditProfileModal
+                        authCheck={authCheck}
+                        onClose={() => setIsModalOpen(false)}
+                      />
+                    )}
+                  </>
                 )}
-                {isMyProfile && profileImg && (
-                  <button
-                    className="btn btn-primary rounded-full btn-sm text-white px-4 ml-2"
-                    onClick={() => {
-                      const modal =
-                        document.getElementById("edit_profile_modal");
-                      if (modal) {
-                        (modal as HTMLDialogElement).showModal();
-                      }
-                    }}
-                  >
-                    Update Profile
-                  </button>
-                )}
+                <div className="text-xs font-semibold text-gray-900 items-center">
+                  {memberSinceDate}
+                </div>
               </>
             )}
-            <div>{memberSinceDate}</div>
           </div>
         </div>
       </div>

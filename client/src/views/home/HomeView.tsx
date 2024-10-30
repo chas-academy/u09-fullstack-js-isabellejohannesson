@@ -9,31 +9,25 @@ const HomeView = () => {
   return (
     <>
       <CreatePost />
-      <div className="dropdown">
-        <div tabIndex={0} role="button" className="btn btn-secondary">
-          {feedType === "forYou" ? "For You" : "Following"}
-        </div>
-        <ul
-          tabIndex={0}
-          className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+      <div className="flex w-full border-b border-gray-700 mt-4">
+        <div
+          className="flex justify-center flex-1 p-3 hover:bg-secondary transition duration-300 relative cursor-pointer"
+          onClick={() => setFeedType("posts")}
         >
-          <li>
-            <a
-              className="flex justify-center flex-1 p-3 hover:bg-secondary transition duration-300 cursor-pointer relative"
-              onClick={() => setFeedType("forYou")}
-            >
-              For you
-            </a>
-          </li>
-          <li>
-            <a
-              className="flex justify-center flex-1 p-3 hover:bg-secondary transition duration-300 cursor-pointer relative"
-              onClick={() => setFeedType("following")}
-            >
-              Following
-            </a>
-          </li>
-        </ul>
+          Posts
+          {feedType === "forYou" && (
+            <div className="absolute bottom-0 w-10 h-1 rounded-full bg-primary" />
+          )}
+        </div>
+        <div
+          className="flex justify-center flex-1 p-3 text-slate-500 hover:bg-secondary transition duration-300 relative cursor-pointer"
+          onClick={() => setFeedType("likes")}
+        >
+          Likes
+          {feedType === "following" && (
+            <div className="absolute bottom-0 w-10  h-1 rounded-full bg-primary" />
+          )}
+        </div>
       </div>
 
       <Posts feedType={feedType} />

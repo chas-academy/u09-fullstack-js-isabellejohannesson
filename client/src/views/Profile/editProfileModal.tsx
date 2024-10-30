@@ -2,7 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import useUpdateUserProfile from "../../hooks/useUpdateUserProfile";
 import type User from "../../types/User";
 
-const EditProfileModal = ({ authCheck }: { authCheck: User }) => {
+type EditProfileModalProps = {
+  authCheck: User;
+  onClose?: () => void;
+};
+
+const EditProfileModal: React.FC<EditProfileModalProps> = ({
+  authCheck,
+  onClose,
+}) => {
   const modalRef = useRef<HTMLDialogElement | null>(null);
   const [formData, setFormData] = useState({
     fullName: "",
@@ -115,7 +123,9 @@ const EditProfileModal = ({ authCheck }: { authCheck: User }) => {
           </form>
         </div>
         <form method="dialog" className="modal-backdrop">
-          <button className="outline-none">close</button>
+          <button className="outline-none" onClick={onClose}>
+            Close
+          </button>
         </form>
       </dialog>
     </>
