@@ -31,7 +31,7 @@ const ProfileView = () => {
     refetch,
     isRefetching,
   } = useQuery({
-    queryKey: ["userProfile"],
+    queryKey: ["profile"],
     queryFn: async () => {
       try {
         const res = await fetch(
