@@ -89,50 +89,49 @@ const NotificationsView = () => {
             </li>
           </ul>
         </details>
-
-        {isLoading && (
-          <div className="flex justify-center h-full items-center">
-            <ProcessingWheel />
-          </div>
-        )}
-        {notifications?.length === 0 && (
-          <div className="text-center text-primary font-semibold">
-            No notifications <BsEmojiExpressionless className="text-primary" />
-          </div>
-        )}
-        {notifications?.map((notification: Notification) => (
-          <div className="flex gap-2 p-4">
-            {notification.type === "follow" && (
-              <FaUser className="w-7 h-7 text-primary" />
-            )}
-            {notification.type === "like" && (
-              <FaHeart className="w-7 h-7 text-red-600" />
-            )}
-            {notification.type === "comment" && (
-              <FaRegComment className="w-7 h-7 text-accent" />
-            )}
-            <Link to={`/profile/${notification.from.userName}`}>
-              <div className="avatar">
-                <div className="w-8 rounded-full">
-                  <img
-                    src={
-                      notification.from.profileImg || "/Placeholder_avatar.png"
-                    }
-                  />
-                </div>
-              </div>
-              <div className="flex gap-1">
-                <span className="font-bold">@{notification.from.userName}</span>{" "}
-                {notification.type === "follow"
-                  ? "followed you"
-                  : notification.type === "like"
-                  ? "liked your post"
-                  : "commented on your post"}
-              </div>
-            </Link>
-          </div>
-        ))}
       </div>
+      {isLoading && (
+        <div className="flex justify-center h-full items-center">
+          <ProcessingWheel />
+        </div>
+      )}
+      {notifications?.length === 0 && (
+        <div className="text-center text-primary font-semibold">
+          No notifications <BsEmojiExpressionless className="text-primary" />
+        </div>
+      )}
+      {notifications?.map((notification: Notification) => (
+        <div className="flex gap-2 p-4">
+          {notification.type === "follow" && (
+            <FaUser className="w-7 h-7 text-primary" />
+          )}
+          {notification.type === "like" && (
+            <FaHeart className="w-7 h-7 text-red-600" />
+          )}
+          {notification.type === "comment" && (
+            <FaRegComment className="w-7 h-7 text-accent" />
+          )}
+          <Link to={`/profile/${notification.from.userName}`}>
+            <div className="avatar">
+              <div className="w-8 rounded-full">
+                <img
+                  src={
+                    notification.from.profileImg || "/Placeholder_avatar.png"
+                  }
+                />
+              </div>
+            </div>
+            <div className="flex gap-1">
+              <span className="font-bold">@{notification.from.userName}</span>{" "}
+              {notification.type === "follow"
+                ? "followed you"
+                : notification.type === "like"
+                ? "liked your post"
+                : "commented on your post"}
+            </div>
+          </Link>
+        </div>
+      ))}
     </div>
   );
 };
