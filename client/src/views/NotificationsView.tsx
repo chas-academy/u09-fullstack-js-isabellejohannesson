@@ -77,64 +77,62 @@ const NotificationsView = () => {
     <div className="wrapper flex flex-col min-h-screen overflow-y-auto w-full lg:max-w-md">
       <div className="flex justify-between items-center p-4 border-b border-primary">
         <p className="font-bold font-heading">Notifications</p>
-        <div className="dropdown ">
-          <div tabIndex={0} role="button" className="m-1">
+        <details className="dropdown" role="button">
+          <summary className="btn m-1">
             <IoSettingsOutline className="w-4" />
-          </div>
-          <ul
-            tabIndex={0}
-            className="dropdown-content z-[1] menu p-6 rounded-box w-auto"
-          >
+          </summary>
+          <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
             <li className="flex items-center text-red-600">
               <a onClick={() => deleteNotifications()}>
                 Delete all notifications?
               </a>
             </li>
           </ul>
-        </div>
-      </div>
-      {isLoading && (
-        <div className="flex justify-center h-full items-center">
-          <ProcessingWheel />
-        </div>
-      )}
-      {notifications?.length === 0 && (
-        <div className="text-center text-primary font-semibold">
-          No notifications <BsEmojiExpressionless className="text-primary" />
-        </div>
-      )}
-      {notifications?.map((notification: Notification) => (
-        <div className="flex gap-2 p-4">
-          {notification.type === "follow" && (
-            <FaUser className="w-7 h-7 text-primary" />
-          )}
-          {notification.type === "like" && (
-            <FaHeart className="w-7 h-7 text-red-600" />
-          )}
-          {notification.type === "comment" && (
-            <FaRegComment className="w-7 h-7 text-accent" />
-          )}
-          <Link to={`/profile/${notification.from.userName}`}>
-            <div className="avatar">
-              <div className="w-8 rounded-full">
-                <img
-                  src={
-                    notification.from.profileImg || "/Placeholder_avatar.png"
-                  }
-                />
+        </details>
+
+        {isLoading && (
+          <div className="flex justify-center h-full items-center">
+            <ProcessingWheel />
+          </div>
+        )}
+        {notifications?.length === 0 && (
+          <div className="text-center text-primary font-semibold">
+            No notifications <BsEmojiExpressionless className="text-primary" />
+          </div>
+        )}
+        {notifications?.map((notification: Notification) => (
+          <div className="flex gap-2 p-4">
+            {notification.type === "follow" && (
+              <FaUser className="w-7 h-7 text-primary" />
+            )}
+            {notification.type === "like" && (
+              <FaHeart className="w-7 h-7 text-red-600" />
+            )}
+            {notification.type === "comment" && (
+              <FaRegComment className="w-7 h-7 text-accent" />
+            )}
+            <Link to={`/profile/${notification.from.userName}`}>
+              <div className="avatar">
+                <div className="w-8 rounded-full">
+                  <img
+                    src={
+                      notification.from.profileImg || "/Placeholder_avatar.png"
+                    }
+                  />
+                </div>
               </div>
-            </div>
-            <div className="flex gap-1">
-              <span className="font-bold">@{notification.from.userName}</span>{" "}
-              {notification.type === "follow"
-                ? "followed you"
-                : notification.type === "like"
-                ? "liked your post"
-                : "commented on your post"}
-            </div>
-          </Link>
-        </div>
-      ))}
+              <div className="flex gap-1">
+                <span className="font-bold">@{notification.from.userName}</span>{" "}
+                {notification.type === "follow"
+                  ? "followed you"
+                  : notification.type === "like"
+                  ? "liked your post"
+                  : "commented on your post"}
+              </div>
+            </Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
