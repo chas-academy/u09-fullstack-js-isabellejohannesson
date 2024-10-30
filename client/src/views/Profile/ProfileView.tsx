@@ -19,7 +19,6 @@ const ProfileView = () => {
   const profileImgRef = useRef<HTMLInputElement>(null);
 
   const { userName } = useParams();
-  console.log("username from params:", userName); //Returneras
 
   const { follow, isPending } = useFollow();
   const { data: authCheck } = useQuery<User>({ queryKey: ["authCheck"] });
@@ -40,7 +39,7 @@ const ProfileView = () => {
           }
         );
         const data = await res.json();
-        console.log("Från profile-fetch: ", data);
+
         if (!res.ok) {
           throw new Error(data.error || "Something went wrong");
         }
@@ -97,7 +96,7 @@ const ProfileView = () => {
         <div className="flex flex-row justify-between">
           {/* User Information */}
           <div className="user-info-div">
-            <h1 className="text-2xl font-bold text-primary">
+            <h1 className="text-2xl font-bold font-heading text-primary">
               {user?.fullName}
             </h1>
             <p className="text-sm text-gray-800">
