@@ -126,7 +126,7 @@ const ProfileView = () => {
         {/*profileImg and Edit Button */}
         <div className="flex flex-col items-center">
           <img
-            src={user.profileImg}
+            src={user?.profileImg}
             alt="Profile"
             className="w-28 h-28 rounded-full border-2 border-gray-300"
           />
