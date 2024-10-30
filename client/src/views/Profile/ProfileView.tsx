@@ -20,6 +20,7 @@ const ProfileView = () => {
   const profileImgRef = useRef(null);
 
   const { userName } = useParams();
+  console.log("username from params:", userName);
 
   const { follow, isPending } = useFollow();
   const { data: authCheck } = useQuery<User>({ queryKey: ["authCheck"] });
@@ -44,7 +45,7 @@ const ProfileView = () => {
           throw new Error(data.error || "Something went wrong");
         }
         console.log("Från profile-fetch: ", data);
-        return data;
+        return data || null;
       } catch (error) {
         if (error instanceof Error) {
           console.error("Error in profile-view:", error.message);
