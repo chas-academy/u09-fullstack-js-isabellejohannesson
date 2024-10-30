@@ -23,8 +23,10 @@ const Header = () => {
     <>
       <header className="flex justify-between items-center my-6 px-4 top-0">
         <h1 className="text-xs font-bold text-accent lg:ml-20">{activeView}</h1>
-        <Link to="/home">
-          <h1 className="font-heading text-primary text-xl">Banterly</h1>
+        <Link to="/home" className="cursor-pointer">
+          <h1 className="font-heading text-primary text-2xl shadow-sm border-b-primary">
+            Banterly
+          </h1>
         </Link>
         <Link
           to={"/search"}

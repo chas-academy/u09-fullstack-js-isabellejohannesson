@@ -104,27 +104,36 @@ const Searchbar = () => {
 
         {(searchLoading || !searchResults) && query && <p>Searching...</p>}
 
-        {searchResults && (
+        {searchResults?.users && (
           <div>
-            <h2>Users</h2>
+            <h2 className="font-heading text-lg">Users</h2>
             <ul>
               {searchResults.users.map((user) => (
-                <li key={user._id}>
-                  <a href={`/profile/${user.userName}`}>
+                <li key={user._id} className="border-b-primary px-2 py-4">
+                  <a
+                    className="hover:bg-primary hover:text-accent cursor-pointer"
+                    href={`/profile/${user.userName}`}
+                  >
                     {user.fullName} (@{user.userName})
                   </a>
                 </li>
               ))}
             </ul>
-
-            <h2>Posts</h2>
-            <ul>
-              {searchResults.posts.map((post) => (
-                <li key={post._id}>
-                  <a href={`/posts/${post.user._id}`}>{post.text}</a>
-                </li>
-              ))}
-            </ul>
+            {searchResults.posts && (
+              <>
+                <h2 className="font-heading text-lg">Posts</h2>
+                <ul>
+                  {searchResults.posts.map((post) => (
+                    <li
+                      className="hover:bg-primary hover:text-accent cursor-pointer px-2 py-4"
+                      key={post._id}
+                    >
+                      <a href={`/posts/${post.user._id}`}>{post.text}</a>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
           </div>
         )}
 

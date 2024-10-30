@@ -8,6 +8,7 @@ import ProcessingWheel from "../components/ProcessingWheel";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FaUser, FaRegComment } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa6";
+import { BsEmojiExpressionless } from "react-icons/bs";
 
 import type Notification from "../types/Notifications";
 
@@ -73,20 +74,20 @@ const NotificationsView = () => {
   });
 
   return (
-    <div className="wrapper flex flex-col">
+    <div className="wrapper flex flex-col min-h-screen overflow-y-auto w-full lg:max-w-md">
       <div className="flex justify-between items-center p-4 border-b border-primary">
-        <p className="font-bold">Notifications</p>
+        <p className="font-bold font-heading">Notifications</p>
         <div className="dropdown ">
           <div tabIndex={0} role="button" className="m-1">
             <IoSettingsOutline className="w-4" />
           </div>
           <ul
             tabIndex={0}
-            className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-auto"
+            className="dropdown-content z-[1] menu p-6 rounded-box w-auto"
           >
-            <li className="flex items-center">
+            <li className="flex items-center text-red-600">
               <a onClick={() => deleteNotifications()}>
-                Delete all notifications
+                Delete all notifications?
               </a>
             </li>
           </ul>
@@ -98,8 +99,8 @@ const NotificationsView = () => {
         </div>
       )}
       {notifications?.length === 0 && (
-        <div className="text-center text-primary font-bold">
-          No notifications...
+        <div className="text-center text-primary font-semibold">
+          No notifications <BsEmojiExpressionless className="text-primary" />
         </div>
       )}
       {notifications?.map((notification: Notification) => (
