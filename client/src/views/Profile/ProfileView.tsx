@@ -100,7 +100,7 @@ const ProfileView = () => {
           <div>
             <h1 className="text-2xl font-bold text-primary">{user.fullName}</h1>
             <p className="text-sm text-gray-500">
-              @{user.username.toLowerCase()}
+              @{user.userName.toLowerCase()}
             </p>
             {user.bio && (
               <p className="text-sm mt-1 text-secondary">{user.bio}</p>
