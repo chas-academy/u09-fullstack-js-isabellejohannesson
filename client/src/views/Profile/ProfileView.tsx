@@ -20,7 +20,7 @@ const ProfileView = () => {
   const profileImgRef = useRef(null);
 
   const { userName } = useParams();
-  console.log("username from params:", userName);
+  console.log("username from params:", userName); //Returneras
 
   const { follow, isPending } = useFollow();
   const { data: authCheck } = useQuery<User>({ queryKey: ["authCheck"] });
@@ -56,6 +56,7 @@ const ProfileView = () => {
         }
       }
     },
+    enabled: !!userName,
   });
 
   const { isUpdatingProfile, updateProfile } = useUpdateUserProfile();
