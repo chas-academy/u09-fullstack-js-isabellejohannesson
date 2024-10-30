@@ -35,16 +35,17 @@ const ProfileView = () => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/profile/${userName}`,
+          `${import.meta.env.VITE_API_URL}/api/users/profile/${userName}`,
           {
             credentials: "include",
           }
         );
         const data = await res.json();
+        console.log("Från profile-fetch: ", data);
         if (!res.ok) {
           throw new Error(data.error || "Something went wrong");
         }
-        console.log("Från profile-fetch: ", data);
+
         return data || null;
       } catch (error) {
         if (error instanceof Error) {
@@ -98,12 +99,14 @@ const ProfileView = () => {
         <div className="flex items-start justify-between">
           {/* User Information */}
           <div>
-            <h1 className="text-2xl font-bold text-primary">{user.fullName}</h1>
+            <h1 className="text-2xl font-bold text-primary">
+              {user?.fullName}
+            </h1>
             <p className="text-sm text-gray-500">
-              @{user.userName.toLowerCase()}
+              @{user?.userName.toLowerCase()}
             </p>
-            {user.bio && (
-              <p className="text-sm mt-1 text-secondary">{user.bio}</p>
+            {user?.bio && (
+              <p className="text-sm mt-1 text-secondary">{user?.bio}</p>
             )}
 
             <div className="flex mt-4 space-x-6 text-sm text-primary">
@@ -186,7 +189,7 @@ const ProfileView = () => {
           )}
         </div>
       </div>
-      <Posts feedType={feedType} userName={userName} _id={user._id} />
+      <Posts feedType={feedType} userName={userName} _id={user?._id} />
     </div>
   );
 };
