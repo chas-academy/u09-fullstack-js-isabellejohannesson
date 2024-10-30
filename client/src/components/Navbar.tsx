@@ -2,7 +2,6 @@ import { FaSearch } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { MdOutlineLogin } from "react-icons/md";
-import { FaHeart } from "react-icons/fa";
 import { FaBell } from "react-icons/fa";
 import { FaStar } from "react-icons/fa6";
 
@@ -61,9 +60,6 @@ const Navbar = () => {
         </Link>
         <Link to={"/search"} className="link link:hover">
           <FaSearch />
-        </Link>
-        <Link to={"/liked"} className="link link:hover">
-          <FaHeart />
         </Link>
         <Link to={"/notifications"} className="link link:hover">
           <FaBell />

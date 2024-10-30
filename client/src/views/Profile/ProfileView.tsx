@@ -139,6 +139,23 @@ const ProfileView = () => {
                 {!isPending && !amIFollowing && "Follow"}
               </button>
             )}
+            {isMyProfile && authCheck && (
+              <>
+                <button
+                  className="btn btn-primary rounded-full btn-sm text-white px-4 ml-2 my-4"
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  Update Profile
+                </button>
+
+                {isModalOpen && (
+                  <EditProfileModal
+                    authCheck={authCheck}
+                    onClose={() => setIsModalOpen(false)}
+                  />
+                )}
+              </>
+            )}
 
             {isMyProfile && (
               <>
@@ -150,23 +167,7 @@ const ProfileView = () => {
                   onChange={(e) => handleImgChange(e, "profileImg")}
                 />
                 {/* Edit Profile Modal and Button */}
-                {isMyProfile && authCheck && (
-                  <>
-                    <button
-                      className="btn btn-primary rounded-full btn-sm text-white px-4 ml-2 my-4"
-                      onClick={() => setIsModalOpen(true)}
-                    >
-                      Update Profile
-                    </button>
 
-                    {isModalOpen && (
-                      <EditProfileModal
-                        authCheck={authCheck}
-                        onClose={() => setIsModalOpen(false)}
-                      />
-                    )}
-                  </>
-                )}
                 <div className="text-xs font-semibold text-gray-900 items-center">
                   {memberSinceDate}
                 </div>

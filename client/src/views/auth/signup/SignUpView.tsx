@@ -68,7 +68,7 @@ const SignUpView = () => {
     },
     onSuccess: () => {
       toast.success("Account created successfully. Welcome to Banterly!");
-      navigate("/home");
+      setTimeout(() => navigate("/home"), 100);
     },
   });
 
